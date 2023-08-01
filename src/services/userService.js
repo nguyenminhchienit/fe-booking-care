@@ -8,4 +8,8 @@ let getAllUsers = (inputId) => {
     return axios.get(`/api/get-all-users?id=${inputId}`)
 }
 
-export {handleLogin, getAllUsers}
+let createNewUserService = (data) => {
+    return axios.post("/api/create-new-user",data);
+}
+
+export {handleLogin, getAllUsers,createNewUserService}

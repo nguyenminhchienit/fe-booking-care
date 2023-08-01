@@ -1,0 +1,36 @@
+//Ghi de class icon close cua modal
+.modal-header{
+    button{
+        color: white;
+        background-color: transparent;
+        font-size: 24px;
+        border: none;
+        outline: none;
+    }
+}
+
+.modal-container-user{
+    .modal-user-body{
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+        .input-container{
+            display: flex;
+            flex-direction: column;
+            width: 50%;
+        }
+
+        .full-with-input{
+            width: 100%;
+        }
+    
+        input{
+            border-radius: 3px;
+            height: 30px;
+            border: 1px solid gray;
+            outline: none;
+            padding: 0 10px;
+        }
+    }
+
+}
