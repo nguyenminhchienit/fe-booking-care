@@ -12,4 +12,16 @@ let createNewUserService = (data) => {
     return axios.post("/api/create-new-user",data);
 }
 
-export {handleLogin, getAllUsers,createNewUserService}
+let deleteUserService = (userId) => {
+    return axios.delete("/api/delete-user",{
+        data: {
+            id: userId
+        }
+    });
+}
+
+let editUserService = (inputData) => {
+    return axios.put("/api/edit-user",inputData)
+}
+
+export {handleLogin, getAllUsers,createNewUserService,deleteUserService,editUserService}

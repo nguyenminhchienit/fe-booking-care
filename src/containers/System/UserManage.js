@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './UserManage.scss'
-import {getAllUsers, createNewUserService} from "../../services/userService"
+import {getAllUsers, createNewUserService, deleteUserService, editUserService} from "../../services/userService"
 import ModalUser from './ModalUser';
+import ModalEditUser from './ModalEditUser';
+import {emitter} from '../../utils/emitter'
+
 class UserManage extends Component {
 
     constructor(props){
         super(props)
         this.state = {
             arrUsers: [],
-            isOpenModalUser: false
+            isOpenModalUser: false,
+            isOpenModalEditUser: false,
+            userEdit: {}
         }
     }
 
@@ -38,6 +43,12 @@ class UserManage extends Component {
         })
     }
 
+    toggleUserEditModal = () => {
+        this.setState({
+            isOpenModalEditUser: !this.state.isOpenModalEditUser
+        })
+    }
+
     handleCreateNewUser = async (data) => {
         try {
             let response = await createNewUserService(data);
@@ -48,6 +59,46 @@ class UserManage extends Component {
                 this.setState({
                     isOpenModalUser: false
                 })
+                emitter.emit("EVENT_CLEAR_MODAL_DATA")
+            }
+            
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    handleDeleteUser = async (user) => {
+        try {
+            let response = await deleteUserService(user.id);
+            console.log(response)
+            if(response && response.errCode === 0){
+                await this.getAllUsersFromReact()
+            } else{
+                alert(response.message)
+            }       
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    handleEditUser = (user) => {
+        console.log("Edit user: ",user);
+        this.setState({
+            isOpenModalEditUser: true,
+            userEdit: user
+        })
+    }
+
+    handleUpdateUser = async (data) => {
+        try {
+            let response = await editUserService(data);
+            if(response && response.errCode === 0){
+                this.setState({
+                    isOpenModalEditUser: false
+                })
+                await this.getAllUsersFromReact();
+            }else{
+                alert(response.message)
             }
             
         } catch (e) {
@@ -64,6 +115,12 @@ class UserManage extends Component {
                     toggleFromParent = {this.toggleUserModal}
                     handleCreateNewUser = {this.handleCreateNewUser}
                 />
+                {this.state.isOpenModalEditUser && <ModalEditUser 
+                    isOpen = {this.state.isOpenModalEditUser}
+                    toggleFromParent = {this.toggleUserEditModal}
+                    currentUser = {this.state.userEdit}
+                    editUser = {this.handleUpdateUser}
+                />}
                 <div className='title text-center'>Manage users</div>
                 <div className='mx-1'>
                     <button className='btn btn-primary px-3' onClick={() => this.handleAddNewUser()}>
@@ -88,10 +145,10 @@ class UserManage extends Component {
                                     <td>{item.email}</td>
                                     <td>{item.address}</td>
                                     <td>
-                                        <button className='edit-user'>
+                                        <button className='edit-user' onClick={() => this.handleEditUser(item)}>
                                             <i className="fas fa-pencil-alt"></i>
                                         </button>
-                                        <button className='delete-user'>
+                                        <button className='delete-user' onClick={() => this.handleDeleteUser(item)}>
                                             <i className="fas fa-trash"></i>
                                         </button>
                                     </td>
