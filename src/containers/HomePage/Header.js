@@ -37,6 +37,65 @@ class Header extends Component {
                         <i className="far fa-question-circle icon-header-help"></i>
                         <span className='help-header'>Hỗ trợ</span>
                         <span className='phone-help'>0392845906</span>
+                        <span className='help-header'>VN</span>
+                        <span className='help-header'>EN</span>
+                    </div>
+                </div>
+                <div className='header-home-banner'>
+                    <div className='image-banner'>
+                        <div className='banner-up'>
+                            <div className='title-banner'>NỀN TẢNG Y TẾ</div>
+                            <div className='sub-title'>CHĂM SÓC SỨC KHỎE TOÀN DIỆN</div>
+                            <div className='main-search'>
+                                <i className="fas fa-search icon-search-header"></i>
+                                <input type='text' placeholder='Tìm kiếm' className='input-search-header'/>
+                            </div>
+                        </div>
+                        <div className='banner-down'>
+                            <div className='option-banner'>
+                                <div className='option-banner-child'>
+                                    <div className='icon-banner'>
+                                        <i className="fas fa-hospital icon-option"></i>
+                                    </div>
+                                    <span className='option-title'>Khám chuyên khoa</span>
+                                </div>
+
+                                <div className='option-banner-child'>
+                                    <div className='icon-banner'>
+                                        <i className="fas fa-mobile-alt icon-option"></i>
+                                    </div>
+                                    <span className='option-title'>Khám bệnh từ xa</span>
+                                </div>
+
+                                <div className='option-banner-child'>
+                                    <div className='icon-banner'>
+                                        <i className="fas fa-address-book icon-option"></i>
+                                    </div>
+                                    <span className='option-title'>Khám bệnh tổng quát</span>
+                                </div>
+
+                                <div className='option-banner-child'>
+                                    <div className='icon-banner'>
+                                        <i className="fas fa-vial icon-option"></i>
+                                    </div>
+                                    <span className='option-title'>Xét nghiệm y học</span>
+                                </div>
+
+                                <div className='option-banner-child'>
+                                    <div className='icon-banner'>
+                                        <i className="fas fa-users icon-option"></i>
+                                    </div>
+                                    <span className='option-title'>Sức khỏe tinh thần</span>
+                                </div>
+
+                                <div className='option-banner-child'>
+                                    <div className='icon-banner'>
+                                        <i className="fas fa-hospital icon-option"></i>
+                                    </div>
+                                    <span className='option-title'>Khám chuyên khoa</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
