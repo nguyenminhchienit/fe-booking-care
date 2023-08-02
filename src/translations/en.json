@@ -1,4 +1,23 @@
 {
+    "headerhome":{
+        "speciality": "Medical speciality",
+        "idspeciality": "Find a doctor by specialty",
+        "facilities": "Health facilities",
+        "clinic": "Choose hospital clinic",
+        "doctor": "Doctor",
+        "chooseDoctor": "Choose a good doctor",
+        "package": "Checkup package",
+        "general": "General health check",
+        "help": "Support",
+        "medical": "MEDICAL BACKGROUND",
+        "care": "COMPREHENSIVE HEALTH CARE",
+        "exam": "Specialized examination",
+        "remote": "Remote medical examination",
+        "physical": "Physical exam",
+        "test": "Medical test",
+        "health": "Mental health",
+        "dental": "Dental examination"
+    },
     "common": {
         "add": "Add",
         "edit": "Edit",
