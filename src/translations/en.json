@@ -16,7 +16,8 @@
         "physical": "Physical exam",
         "test": "Medical test",
         "health": "Mental health",
-        "dental": "Dental examination"
+        "dental": "Dental examination",
+        "translate": "Search"
     },
     "common": {
         "add": "Add",

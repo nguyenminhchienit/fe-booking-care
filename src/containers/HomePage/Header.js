@@ -15,40 +15,41 @@ class Header extends Component {
     render() {
         console.log("Check props: ",this.props)
         return (
-            
-            <div className='header-home-container'>
-                <div className='header-home-content'>
-                    <div className='left-content'>
-                        <i className="fas fa-bars icon-bars-header"></i>
-                        <div className='logo-header'>
+            <React.Fragment>
+                <div className='header-home-container'>
+                    <div className='header-home-content'>
+                        <div className='left-content'>
+                            <i className="fas fa-bars icon-bars-header"></i>
+                            <div className='logo-header'>
+                            </div>
                         </div>
-                    </div>
-                    <div className='center-content'>
-                        <ul className='list-nav'>
-                            <li className='item-nav'>
-                                <span className='sub-item-nav'><FormattedMessage id="headerhome.speciality"/></span>
-                                <span className='des-item-nav'><FormattedMessage id="headerhome.idspeciality"/></span>
-                            </li>
-                            <li className='item-nav'>
-                                <span className='sub-item-nav'><FormattedMessage id="headerhome.facilities"/></span>
-                                <span className='des-item-nav'><FormattedMessage id="headerhome.clinic"/></span>
-                            </li>
-                            <li className='item-nav'>
-                                <span className='sub-item-nav'><FormattedMessage id="headerhome.doctor"/></span>
-                                <span className='des-item-nav'><FormattedMessage id="headerhome.chooseDoctor"/></span>
-                            </li>
-                            <li className='item-nav'>
-                                <span className='sub-item-nav'><FormattedMessage id="headerhome.package"/></span>
-                                <span className='des-item-nav'><FormattedMessage id="headerhome.general"/></span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div className='right-content'>
-                        <i className="far fa-question-circle icon-header-help"></i>
-                        <span className='help-header'><FormattedMessage id="headerhome.help"/></span>
-                        <span className='phone-help'>0392845906</span>
-                        <span className={this.props.lang === LANGUAGES.VI ? 'help-header language-vi active' : 'help-header language-vi'} onClick={() => this.changeLanguage(LANGUAGES.VI)}>VN</span>
-                        <span className={this.props.lang === LANGUAGES.EN ? 'help-header language-en active' : 'help-header language-en'} onClick={() => this.changeLanguage(LANGUAGES.EN)}>EN</span>
+                        <div className='center-content'>
+                            <ul className='list-nav'>
+                                <li className='item-nav'>
+                                    <span className='sub-item-nav'><FormattedMessage id="headerhome.speciality"/></span>
+                                    <span className='des-item-nav'><FormattedMessage id="headerhome.idspeciality"/></span>
+                                </li>
+                                <li className='item-nav'>
+                                    <span className='sub-item-nav'><FormattedMessage id="headerhome.facilities"/></span>
+                                    <span className='des-item-nav'><FormattedMessage id="headerhome.clinic"/></span>
+                                </li>
+                                <li className='item-nav'>
+                                    <span className='sub-item-nav'><FormattedMessage id="headerhome.doctor"/></span>
+                                    <span className='des-item-nav'><FormattedMessage id="headerhome.chooseDoctor"/></span>
+                                </li>
+                                <li className='item-nav'>
+                                    <span className='sub-item-nav'><FormattedMessage id="headerhome.package"/></span>
+                                    <span className='des-item-nav'><FormattedMessage id="headerhome.general"/></span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div className='right-content'>
+                            <i className="far fa-question-circle icon-header-help"></i>
+                            <span className='help-header'><FormattedMessage id="headerhome.help"/></span>
+                            <span className='phone-help'>0392845906</span>
+                            <span className={this.props.lang === LANGUAGES.VI ? 'help-header language-vi active' : 'help-header language-vi'} onClick={() => this.changeLanguage(LANGUAGES.VI)}>VN</span>
+                            <span className={this.props.lang === LANGUAGES.EN ? 'help-header language-en active' : 'help-header language-en'} onClick={() => this.changeLanguage(LANGUAGES.EN)}>EN</span>
+                        </div>
                     </div>
                 </div>
                 <div className='header-home-banner'>
@@ -108,7 +109,7 @@ class Header extends Component {
                         </div>
                     </div>
                 </div>
-            </div>
+            </React.Fragment>       
         );
     }
 

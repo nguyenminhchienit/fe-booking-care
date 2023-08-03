@@ -16,7 +16,8 @@
         "physical": "Khám bệnh tổng quát",
         "test": "Xét nghiệm y học",
         "health": "Sức khỏe tinh thần",
-        "dental": "Khám nha khoa"
+        "dental": "Khám nha khoa",
+        "translate": "Tìm kiếm"
     },
     "common": {
         "add": "Thêm",
