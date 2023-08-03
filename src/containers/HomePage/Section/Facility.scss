@@ -1,28 +1,29 @@
-.seation-speciality{
+.seation-facility{
     height: 320px;
-    background-color: #f5f5f5;
+    background-color: #ffffff;
+    // border-top: 1px solid #45c3d2;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 
-    .speciality-container{
+    .facility-container{
         height: 100%;
         width: 1140px;
         margin: 0 auto;
 
-        .speciality-header{
+        .facility-header{
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 20px 0;
         }
 
-        .speciality-title{
+        .facility-title{
             font-weight: 600;
             line-height: 36px;
             font-size: 20px;
             margin-bottom: 0;
         }
 
-        .speciality-btn{
+        .facility-btn{
             padding: 8px 20px;
             color: #fff;
             background-color: #45c3d2;
@@ -39,18 +40,20 @@
         }
     }
 
-    .speciality-body{
+    .facility-body{
         margin: 0 auto;
-        .speciality-thumb{
+        .facility-thumb{
             height: 168px;
             width: 268px;
-            background-image: url('../../../assets/speciality/nhi-khoa.jpg');
+            background-image: url('../../../assets/speciality/facility.jpg');
             background-position: center center;
             background-repeat: no-repeat;
             background-size: cover;
+            object-fit: cover;
+            box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
         }
 
-        .sub-title-speciality{
+        .sub-title-facility{
             margin-top: 20px;
             font-size: 16px;
             font-weight: 500;
