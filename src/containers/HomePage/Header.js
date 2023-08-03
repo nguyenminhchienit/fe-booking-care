@@ -2,8 +2,15 @@ import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import './Header.scss'
+import {LANGUAGES} from "../../utils"
+
+import { changeLanguageApp } from '../../store/actions/appActions';
 
 class Header extends Component {
+
+    changeLanguage = (language) => {
+        this.props.changeLanguageAppRedux(language)
+    }
 
     render() {
         console.log("Check props: ",this.props)
@@ -40,8 +47,8 @@ class Header extends Component {
                         <i className="far fa-question-circle icon-header-help"></i>
                         <span className='help-header'><FormattedMessage id="headerhome.help"/></span>
                         <span className='phone-help'>0392845906</span>
-                        <span className='help-header language-vi active'>VN</span>
-                        <span className='help-header language-en'>EN</span>
+                        <span className={this.props.lang === LANGUAGES.VI ? 'help-header language-vi active' : 'help-header language-vi'} onClick={() => this.changeLanguage(LANGUAGES.VI)}>VN</span>
+                        <span className={this.props.lang === LANGUAGES.EN ? 'help-header language-en active' : 'help-header language-en'} onClick={() => this.changeLanguage(LANGUAGES.EN)}>EN</span>
                     </div>
                 </div>
                 <div className='header-home-banner'>
@@ -116,6 +123,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
+        changeLanguageAppRedux: (language) => dispatch(changeLanguageApp(language))
     };
 };
 
