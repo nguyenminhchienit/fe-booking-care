@@ -8,6 +8,7 @@ import './Header.scss';
 
 import {LANGUAGES} from "../../utils"
 import { changeLanguageApp } from '../../store/actions/appActions';
+import { FormattedMessage } from 'react-intl';
 
 class Header extends Component {
 
@@ -27,6 +28,10 @@ class Header extends Component {
 
                 <div className='action-system'>
                     <div className='languages'>
+                        <span className='welcome'>
+                            <FormattedMessage id="headerhome.welcome"/>
+                            {this.props.userInfo && this.props.userInfo.lastName ? this.props.userInfo.lastName : ""} 
+                        </span>
                         <span className={this.props.lang === LANGUAGES.VI ? 'language language-vi active' : 'language language-vi'} onClick={() => this.changeLanguage(LANGUAGES.VI)}>VN</span>
                         <span className={this.props.lang === LANGUAGES.EN ? 'language language-en active' : 'language language-en'} onClick={() => this.changeLanguage(LANGUAGES.EN)}>EN</span>
                     </div>
@@ -46,7 +51,8 @@ class Header extends Component {
 const mapStateToProps = state => {
     return {
         isLoggedIn: state.user.isLoggedIn,
-        lang: state.app.language
+        lang: state.app.language,
+        userInfo: state.user.userInfo
     };
 };
 
