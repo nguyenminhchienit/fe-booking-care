@@ -1,0 +1,30 @@
+.about-wrapper{
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+
+    .about-container{
+        width: 1140px;
+        height: 440px;
+        margin: 0 auto;
+    
+        .about-title{
+            font-size: 20px;
+            font-weight: 600;
+            padding: 20px 0;
+        }
+    
+        .about-content{
+            display: flex;
+        }
+    
+        .about-left{
+            width: 50%;
+        }
+    
+        .about-right{
+            width: 50%;
+            margin-top: -10px;
+            margin-left: 10px;
+        }
+    }
+}
+
