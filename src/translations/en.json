@@ -59,7 +59,7 @@
         "gender": "Gender",
         "role": "Role",
         "position": "Position",
-        "image": "Avatar",
+        "image": "Avatar: ",
         "address": "Address",
         "add": "Add"
     }
