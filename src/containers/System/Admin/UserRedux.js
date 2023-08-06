@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 
 
-import {LANGUAGES, CRUD_ACTION} from "../../../utils"
+import {LANGUAGES, CRUD_ACTION, CommonUtils} from "../../../utils"
 import * as actions from '../../../store/actions'
 import './UserRedux.scss'
 
@@ -81,6 +81,7 @@ class UserRedux extends Component {
                 position: this.props.positionRedux && this.props.positionRedux.length > 0 ? this.props.positionRedux[0].key : '',
                 avatar: '',
                 address: '',
+                previewAvatar: '',
                 phoneNumber: '',
                 gender: this.props.genderRedux && this.props.genderRedux.length > 0 ? this.props.genderRedux[0].key : '',
                 action: CRUD_ACTION.CREATE
@@ -88,14 +89,15 @@ class UserRedux extends Component {
         }
     }
 
-    handleChangeFileImg  = (e) => {
+    handleChangeFileImg  = async (e) => {
         let file = e.target.files;
         let fileImg = file[0];
         if(fileImg){
+            let base64 = await CommonUtils.getBase64(fileImg)
             let imgURL = URL.createObjectURL(fileImg);
             this.setState({
                 previewAvatar: imgURL,
-                avatar: file
+                avatar: base64
             })
         }
     }
@@ -132,6 +134,7 @@ class UserRedux extends Component {
                 gender: this.state.gender,
                 roleId: this.state.role,
                 positionId: this.state.position,
+                avatar: this.state.avatar
             })
         }
         if(this.state.action === CRUD_ACTION.EDIT){
@@ -165,7 +168,10 @@ class UserRedux extends Component {
     }
 
     handleEditUserFromParent = (user) => {
-        console.log("edit from parent: ",user)
+        let imageBase64 = '';
+        if(user.image){
+            imageBase64 = new Buffer (user.image, 'base64').toString('binary')
+        }
         this.setState({
             email: user.email,
             password: 'HARDCODE',
@@ -177,6 +183,7 @@ class UserRedux extends Component {
             address: user.address,
             phoneNumber: user.phoneNumber,
             gender: user.gender,
+            previewAvatar: imageBase64,
             userIdEdit: user.id,
 
             action: CRUD_ACTION.EDIT
