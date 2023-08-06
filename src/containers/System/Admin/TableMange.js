@@ -28,6 +28,10 @@ class TableManage extends Component {
         this.props.deleteUser(user.id)
     }
 
+    handleEditUser = (user) => {
+        this.props.handleEditUserFromParent(user)
+    }
+
     render() {
         console.log('check user redux: ',this.props.users)
         return (

@@ -61,7 +61,8 @@
         "position": "Position",
         "image": "Avatar: ",
         "address": "Address",
-        "add": "Add"
+        "add": "Add",
+        "edit": "Save changes"
     }
 }
 
