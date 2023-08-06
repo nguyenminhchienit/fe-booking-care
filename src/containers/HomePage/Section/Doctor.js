@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
+import { LANGUAGES } from '../../../utils';
 import { connect } from 'react-redux';
 import './Doctor.scss'
+import * as actions from '../../../store/actions'
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -10,6 +12,24 @@ import "slick-carousel/slick/slick-theme.css";
 
 
 class Doctor extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            doctorArr: []
+        }
+    }
+
+    componentDidMount(){
+        this.props.fetchDoctorStart();
+    }
+
+    componentDidUpdate(prevProps,prevState,snapshot){
+        if(prevProps.doctorRedux !== this.props.doctorRedux){
+            this.setState({
+                doctorArr: this.props.doctorRedux
+            })
+        }
+    }
 
     render() {
         let settings = {
@@ -19,6 +39,8 @@ class Doctor extends Component {
             slidesToShow: 4,
             slidesToScroll: 1,
           };
+        //   console.log("Check doctor redux: ",this.state.doctorArr)
+        //   console.log("Check lang: ",LANGUAGES.VI === this.props.lang)
         return (
             <React.Fragment>
                 <div className='seation-doctor'>
@@ -29,60 +51,28 @@ class Doctor extends Component {
                         </div>
                         <div className='doctor-body'>
                             <Slider {...settings}>
-                                <div className='img-customize'>
-                                    <div className='doctor-body-info'>
-                                        <div className='doctor-thumb'/>
-                                        <div className="doctor-info">
-                                            <div className='doctor-name'>GS-TS Hoàng Văn Thiên</div>
-                                            <div className='doctor-speciality'>Thần Kinh</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className='img-customize'>
-                                    <div className='doctor-body-info'>
-                                        <div className='doctor-thumb'/>
-                                        <div className="doctor-info">
-                                            <div className='doctor-name'>GS-TS Hoàng Văn Thiên</div>
-                                            <div className='doctor-speciality'>Thần Kinh</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className='img-customize'>
-                                    <div className='doctor-body-info'>
-                                        <div className='doctor-thumb'/>
-                                        <div className="doctor-info">
-                                            <div className='doctor-name'>GS-TS Hoàng Văn Thiên</div>
-                                            <div className='doctor-speciality'>Thần Kinh</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className='img-customize'>
-                                    <div className='doctor-body-info'>
-                                        <div className='doctor-thumb'/>
-                                        <div className="doctor-info">
-                                            <div className='doctor-name'>GS-TS Hoàng Văn Thiên</div>
-                                            <div className='doctor-speciality'>Thần Kinh</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className='img-customize'>
-                                    <div className='doctor-body-info'>
-                                        <div className='doctor-thumb'/>
-                                        <div className="doctor-info">
-                                            <div className='doctor-name'>GS-TS Hoàng Văn Thiên</div>
-                                            <div className='doctor-speciality'>Thần Kinh</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className='img-customize'>
-                                    <div className='doctor-body-info'>
-                                        <div className='doctor-thumb'/>
-                                        <div className="doctor-info">
-                                            <div className='doctor-name'>GS-TS Hoàng Văn Thiên</div>
-                                            <div className='doctor-speciality'>Thần Kinh</div>
-                                        </div>
-                                    </div>
-                                </div>
+                                {this.state.doctorArr && this.state.doctorArr.length > 0 && 
+                                    this.state.doctorArr.map((item,index) => {
+                                        let imageBase64 = '';
+                                        if(item.image){
+                                            imageBase64 = new Buffer (item.image, 'base64').toString('binary')
+                                        }
+                                        let nameVI = `${item.positionData.valueVI}, ${item.firstName} ${item.lastName}`
+                                        let nameEN = `${item.positionData.valueEN}, ${item.lastName} ${item.firstName}`
+
+                                        return (
+                                            <div className='img-customize' key={index}>
+                                                <div className='doctor-body-info'>
+                                                    <div className='doctor-thumb' style={{backgroundImage: `url(${imageBase64})`}}/>
+                                                    <div className="doctor-info">
+                                                        <div className='doctor-name'>{this.props.lang === LANGUAGES.VI ? nameVI : nameEN}</div>
+                                                        <div className='doctor-speciality'>Thần Kinh</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )
+                                    })
+                                }
                             </Slider>
                         </div>
                     </div>
@@ -97,12 +87,14 @@ class Doctor extends Component {
 const mapStateToProps = state => {
     return {
         isLoggedIn: state.user.isLoggedIn,
-        lang: state.app.language
+        lang: state.app.language,
+        doctorRedux: state.admin.doctors
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
+        fetchDoctorStart: () => dispatch(actions.fetchDoctorStart())
     };
 };
 

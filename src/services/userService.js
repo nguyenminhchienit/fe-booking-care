@@ -28,11 +28,16 @@ let getAllCodeService = (inputType) => {
     return axios.get(`/api/allcode?type=${inputType}`);
 }
 
+let getDoctor = (limit) => {
+    return axios.get(`/api/get-doctor?type=${limit}`)
+}
+
 export {
     handleLogin, 
     getAllUsers,
     createNewUserService,
     deleteUserService,
     editUserService,
-    getAllCodeService
+    getAllCodeService,
+    getDoctor
 }
