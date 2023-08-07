@@ -46,8 +46,8 @@ class Doctor extends Component {
                 <div className='seation-doctor'>
                     <div className='doctor-container'>
                         <div className='doctor-header'>
-                            <h2 className='doctor-title'>Bác sĩ nổi bật</h2>
-                            <button className='doctor-btn'>TÌM KIẾM</button>
+                            <h2 className='doctor-title'><FormattedMessage id="homepage.doctor-title"/></h2>
+                            <button className='doctor-btn'><FormattedMessage id="homepage.more"/></button>
                         </div>
                         <div className='doctor-body'>
                             <Slider {...settings}>

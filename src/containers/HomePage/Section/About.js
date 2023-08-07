@@ -12,7 +12,7 @@ class About extends Component {
             <React.Fragment>
                 <div className='about-wrapper'>
                     <div className='about-container'>
-                        <div className='about-title'>Truyền thông nói về TakisCare</div>
+                        <div className='about-title'><FormattedMessage id="homepage.media"/></div>
                         <div className='about-content'>
                             <div className='about-left'>
                                 <iframe 

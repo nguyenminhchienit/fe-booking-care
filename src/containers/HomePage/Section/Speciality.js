@@ -23,8 +23,8 @@ class Speciality extends Component {
                 <div className='seation-speciality'>
                     <div className='speciality-container'>
                         <div className='speciality-header'>
-                            <h2 className='speciality-title'>Chuyên khoa phổ biến</h2>
-                            <button className='speciality-btn'>XEM THÊM</button>
+                            <h2 className='speciality-title'><FormattedMessage id="homepage.popular-specialties"/></h2>
+                            <button className='speciality-btn'><FormattedMessage id="homepage.more"/></button>
                         </div>
                         <div className='speciality-body'>
                             <Slider {...settings}>

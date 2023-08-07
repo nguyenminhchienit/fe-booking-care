@@ -61,5 +61,13 @@
         "address": "Địa chỉ",
         "add": "Thêm",
         "edit": "Lưu thay đổi"
+    },
+    "homepage":{
+        "doctor-title": "Bác sĩ nổi bật",
+        "more": "XEM THÊM",
+        "health-facilities": "Cơ sở y tế",
+        "popular-specialties": "Chuyên khoa phổ biến",
+        "handbook": "Cẩm nang",
+        "media": "Truyền thông nói về TakisCare"
     }
 }

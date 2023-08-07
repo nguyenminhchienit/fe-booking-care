@@ -9,7 +9,7 @@
         "package": "Checkup package",
         "general": "General health check",
         "help": "Support",
-        "medical": "MEDICAL BACKGROUND",
+        "medical": "MEDICAL PLATFORM",
         "care": "COMPREHENSIVE HEALTH CARE",
         "exam": "Specialized examination",
         "remote": "Remote medical examination",
@@ -63,6 +63,14 @@
         "address": "Address",
         "add": "Add",
         "edit": "Save changes"
+    },
+    "homepage":{
+        "doctor-title": "Outstanding Doctor",
+        "more": "MORE",
+        "health-facilities": "Health Facilities",
+        "popular-specialties": "Popular specialties",
+        "handbook": "Handbook",
+        "media": "Media talk about TakisCare"
     }
 }
 

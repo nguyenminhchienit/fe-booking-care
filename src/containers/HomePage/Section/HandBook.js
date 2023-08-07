@@ -24,8 +24,8 @@ class HandBook extends Component {
                 <div className='seation-handbook'>
                     <div className='handbook-container'>
                         <div className='handbook-header'>
-                            <h2 className='handbook-title'>Cẩm nang</h2>
-                            <button className='handbook-btn'>XEM THÊM</button>
+                            <h2 className='handbook-title'><FormattedMessage id="homepage.handbook"/></h2>
+                            <button className='handbook-btn'><FormattedMessage id="homepage.more"/></button>
                         </div>
                         <div className='handbook-body'>
                             <Slider {...settings}>

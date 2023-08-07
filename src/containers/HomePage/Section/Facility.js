@@ -24,8 +24,8 @@ class Facility extends Component {
                 <div className='seation-facility'>
                     <div className='facility-container'>
                         <div className='facility-header'>
-                            <h2 className='facility-title'>Cơ sở y tế</h2>
-                            <button className='facility-btn'>XEM THÊM</button>
+                            <h2 className='facility-title'><FormattedMessage id="homepage.health-facilities"/></h2>
+                            <button className='facility-btn'><FormattedMessage id="homepage.more"/></button>
                         </div>
                         <div className='facility-body'>
                             <Slider {...settings}>
