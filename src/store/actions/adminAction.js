@@ -1,5 +1,5 @@
 import actionTypes from './actionTypes';
-import {getAllCodeService,createNewUserService,getAllUsers,deleteUserService,editUserService,getDoctor} from '../../services/userService'
+import {getAllCodeService,createNewUserService,getAllUsers,postInfoDoctorService,deleteUserService,editUserService,getDoctor,getAllDoctorService} from '../../services/userService'
 import { toast } from 'react-toastify';
 
 export const fetchGenderStart = () => {
@@ -229,5 +229,61 @@ export const fetchDoctorSuccess = (data) => ({
 
 export const fetchDoctorFailed = () => ({
     type: actionTypes.FETCH_DOCTOR_FAILED
+})
+
+
+export const fetchAllDoctorStart = () => {
+    return async (dispatch,getState) => {
+        try {
+            let res = await getAllDoctorService();
+            if(res && res.errCode === 0){
+                dispatch(fetchAllDoctorSuccess(res.data))
+            }else{
+                dispatch(fetchAllDoctorFailed())
+            }
+            
+        } catch (e) {
+            dispatch(fetchAllDoctorFailed())
+            console.log("fetchAllDoctorFailed: ",e);
+        }
+    }
+}
+
+export const fetchAllDoctorSuccess = (data) => ({
+    type: actionTypes.FETCH_ALL_DOCTOR_SUCCESS,
+    data: data
+})
+
+export const fetchAllDoctorFailed = () => ({
+    type: actionTypes.FETCH_ALL_DOCTOR_FAILED
+})
+
+
+export const createInfoDoctorStart = (data) => {
+    return async (dispatch,getState) => {
+        try {
+            let res = await postInfoDoctorService(data);
+            if(res && res.errCode === 0){
+                toast.success("Update info doctor success!")
+                dispatch(createInfoDoctorSuccess())
+            }else{
+                toast.error("Update info doctor failed!")
+                dispatch(createInfoDoctorSuccess())
+            }
+            
+        } catch (e) {
+            toast.error("Update info doctor failed!")
+            dispatch(fetchAllDoctorFailed())
+            console.log("fetchAllDoctorFailed: ",e);
+        }
+    }
+}
+
+export const createInfoDoctorSuccess = () => ({
+    type: actionTypes.CREATE_INFO_DOCTOR_SUCCESS,
+})
+
+export const createInfoDoctorFailed = () => ({
+    type: actionTypes.CREATE_INFO_DOCTOR_FAIL
 })
 

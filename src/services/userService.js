@@ -32,6 +32,14 @@ let getDoctor = (limit) => {
     return axios.get(`/api/get-doctor?type=${limit}`)
 }
 
+let getAllDoctorService = () => {
+    return axios.get('/api/get-all-doctor');
+}
+
+let postInfoDoctorService = (data) => {
+    return axios.post('/api/post-info-doctor',data)
+}
+
 export {
     handleLogin, 
     getAllUsers,
@@ -39,5 +47,7 @@ export {
     deleteUserService,
     editUserService,
     getAllCodeService,
-    getDoctor
+    getDoctor,
+    getAllDoctorService,
+    postInfoDoctorService
 }
