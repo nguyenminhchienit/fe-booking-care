@@ -322,7 +322,6 @@ class UserRedux extends Component {
                                 <div className='col-12 mb-5'>
                                     <TableMange
                                         handleEditUserFromParent= {this.handleEditUserFromParent}
-                                        action = {this.state.action}
                                     />
                                 </div>
                         </div>

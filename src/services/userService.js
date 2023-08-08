@@ -40,6 +40,10 @@ let postInfoDoctorService = (data) => {
     return axios.post('/api/post-info-doctor',data)
 }
 
+let getDoctorInfoDetailService = (inputId) => {
+    return axios.get(`/api/get-detail-doctor-by-id?id=${inputId}`)
+}
+
 export {
     handleLogin, 
     getAllUsers,
@@ -49,5 +53,6 @@ export {
     getAllCodeService,
     getDoctor,
     getAllDoctorService,
-    postInfoDoctorService
+    postInfoDoctorService,
+    getDoctorInfoDetailService
 }

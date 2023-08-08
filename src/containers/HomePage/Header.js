@@ -5,11 +5,18 @@ import './Header.scss'
 import {LANGUAGES} from "../../utils"
 
 import { changeLanguageApp } from '../../store/actions/appActions';
+import { withRouter } from 'react-router-dom';
 
 class Header extends Component {
 
     changeLanguage = (language) => {
         this.props.changeLanguageAppRedux(language)
+    }
+
+    returnHome = () => {
+        if(this.props.history){
+            this.props.history.push('/home')
+        }
     }
 
     render() {
@@ -20,7 +27,7 @@ class Header extends Component {
                     <div className='header-home-content'>
                         <div className='left-content'>
                             <i className="fas fa-bars icon-bars-header"></i>
-                            <div className='logo-header'>
+                            <div className='logo-header' onClick={() => this.returnHome()}>
                             </div>
                         </div>
                         <div className='center-content'>
@@ -52,63 +59,65 @@ class Header extends Component {
                         </div>
                     </div>
                 </div>
-                <div className='header-home-banner'>
-                    <div className='image-banner'>
-                        <div className='banner-up'>
-                            <div className='title-banner'><FormattedMessage id="headerhome.medical"/></div>
-                            <div className='sub-title'><FormattedMessage id="headerhome.care"/></div>
-                            <div className='main-search'>
-                                <i className="fas fa-search icon-search-header"></i>
-                                <input type='text' placeholder='Tìm kiếm' className='input-search-header'/>
+                {this.props.isShowBanner === true &&
+                    <div className='header-home-banner'>
+                        <div className='image-banner'>
+                            <div className='banner-up'>
+                                <div className='title-banner'><FormattedMessage id="headerhome.medical"/></div>
+                                <div className='sub-title'><FormattedMessage id="headerhome.care"/></div>
+                                <div className='main-search'>
+                                    <i className="fas fa-search icon-search-header"></i>
+                                    <input type='text' placeholder='Tìm kiếm' className='input-search-header'/>
+                                </div>
                             </div>
-                        </div>
-                        <div className='banner-down'>
-                            <div className='option-banner'>
-                                <div className='option-banner-child'>
-                                    <div className='icon-banner'>
-                                        <i className="fas fa-hospital icon-option"></i>
+                            <div className='banner-down'>
+                                <div className='option-banner'>
+                                    <div className='option-banner-child'>
+                                        <div className='icon-banner'>
+                                            <i className="fas fa-hospital icon-option"></i>
+                                        </div>
+                                        <span className='option-title'><FormattedMessage id="headerhome.exam"/></span>
                                     </div>
-                                    <span className='option-title'><FormattedMessage id="headerhome.exam"/></span>
-                                </div>
 
-                                <div className='option-banner-child'>
-                                    <div className='icon-banner'>
-                                        <i className="fas fa-mobile-alt icon-option"></i>
+                                    <div className='option-banner-child'>
+                                        <div className='icon-banner'>
+                                            <i className="fas fa-mobile-alt icon-option"></i>
+                                        </div>
+                                        <span className='option-title'><FormattedMessage id="headerhome.remote"/></span>
                                     </div>
-                                    <span className='option-title'><FormattedMessage id="headerhome.remote"/></span>
-                                </div>
 
-                                <div className='option-banner-child'>
-                                    <div className='icon-banner'>
-                                        <i className="fas fa-address-book icon-option"></i>
+                                    <div className='option-banner-child'>
+                                        <div className='icon-banner'>
+                                            <i className="fas fa-address-book icon-option"></i>
+                                        </div>
+                                        <span className='option-title'><FormattedMessage id="headerhome.physical"/></span>
                                     </div>
-                                    <span className='option-title'><FormattedMessage id="headerhome.physical"/></span>
-                                </div>
 
-                                <div className='option-banner-child'>
-                                    <div className='icon-banner'>
-                                        <i className="fas fa-vial icon-option"></i>
+                                    <div className='option-banner-child'>
+                                        <div className='icon-banner'>
+                                            <i className="fas fa-vial icon-option"></i>
+                                        </div>
+                                        <span className='option-title'><FormattedMessage id="headerhome.test"/></span>
                                     </div>
-                                    <span className='option-title'><FormattedMessage id="headerhome.test"/></span>
-                                </div>
 
-                                <div className='option-banner-child'>
-                                    <div className='icon-banner'>
-                                        <i className="fas fa-users icon-option"></i>
+                                    <div className='option-banner-child'>
+                                        <div className='icon-banner'>
+                                            <i className="fas fa-users icon-option"></i>
+                                        </div>
+                                        <span className='option-title'><FormattedMessage id="headerhome.health"/></span>
                                     </div>
-                                    <span className='option-title'><FormattedMessage id="headerhome.health"/></span>
-                                </div>
 
-                                <div className='option-banner-child'>
-                                    <div className='icon-banner'>
-                                        <i className="fas fa-hospital icon-option"></i>
+                                    <div className='option-banner-child'>
+                                        <div className='icon-banner'>
+                                            <i className="fas fa-hospital icon-option"></i>
+                                        </div>
+                                        <span className='option-title'><FormattedMessage id="headerhome.dental"/></span>
                                     </div>
-                                    <span className='option-title'><FormattedMessage id="headerhome.dental"/></span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                }
             </React.Fragment>       
         );
     }
@@ -128,4 +137,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));

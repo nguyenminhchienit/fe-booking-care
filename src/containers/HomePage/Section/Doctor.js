@@ -9,6 +9,8 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+import { withRouter } from 'react-router-dom';
+
 
 
 class Doctor extends Component {
@@ -28,6 +30,14 @@ class Doctor extends Component {
             this.setState({
                 doctorArr: this.props.doctorRedux
             })
+        }
+    }
+
+    handleViewDetailDoctor = (doctor) => {
+        console.log(doctor)
+        //Chuyen huong vao trang deatil-doctor ( nho import thu vien withRoute va boc het component)
+        if(this.props.history){
+            this.props.history.push(`/detail-doctor/${doctor.id}`)
         }
     }
 
@@ -61,7 +71,7 @@ class Doctor extends Component {
                                         let nameEN = `${item.positionData.valueEN}, ${item.lastName} ${item.firstName}`
 
                                         return (
-                                            <div className='img-customize' key={index}>
+                                            <div className='img-customize' key={index} onClick={() => this.handleViewDetailDoctor(item)} >
                                                 <div className='doctor-body-info'>
                                                     <div className='doctor-thumb' style={{backgroundImage: `url(${imageBase64})`}}/>
                                                     <div className="doctor-info">
@@ -98,4 +108,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Doctor);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Doctor));
