@@ -16,7 +16,7 @@ export const adminMenu = [
                 name: 'menu.system.admin.user-doctor', link: '/system/user-doctor',
             },
             {
-                name: 'menu.system.admin.user-admin', link: '/system/user-admin',
+                name: 'menu.system.doctor.manage-schedule', link: '/doctor/manage-schedule',
             },
             // { name: 'menu.system.system-parameter.header', link: '/system/system-parameter' },
         ]
@@ -60,4 +60,16 @@ export const adminMenu = [
             },
         ]
     },
+];
+
+export const doctorMenu = [
+    { //Quản lý người dùng
+        name: 'menu.system.admin.user-manage', 
+        menus: [
+            {
+                name: 'menu.system.doctor.manage-schedule', link: '/doctor/manage-schedule',
+            }
+        ]          
+
+    }
 ];
