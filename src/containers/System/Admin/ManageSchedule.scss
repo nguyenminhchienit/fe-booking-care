@@ -1,0 +1,12 @@
+.manage-schedule-container{
+    .manage-schedule{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        margin: 20px 0;
+        .btn-time{
+            border: 1px solid #ccc;
+        }
+    }
+
+}

@@ -287,3 +287,30 @@ export const createInfoDoctorFailed = () => ({
     type: actionTypes.CREATE_INFO_DOCTOR_FAIL
 })
 
+export const fetchScheduleTimeStart = () => {
+    return async (dispatch,getState) => {
+        try {
+            let res = await getAllCodeService('TIME');
+            if(res && res.errCode === 0){
+                dispatch(fetchScheduleTimeSuccess(res.data))
+            }else{
+                dispatch(fetchScheduleTimeFail())
+            }
+            
+        } catch (e) {
+            dispatch(fetchScheduleTimeFail())
+            console.log("fetchScheduleTimeFail: ",e);
+        }
+    }
+}
+
+export const fetchScheduleTimeSuccess = (dataTime) => ({
+    type: actionTypes.FETCH_TIME_SUCCESS,
+    data: dataTime
+})
+
+export const fetchScheduleTimeFail = () => ({
+    type: actionTypes.FETCH_TIME_FAIL
+})
+
+
