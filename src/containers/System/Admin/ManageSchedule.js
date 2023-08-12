@@ -117,13 +117,18 @@ class ManageSchedule extends Component {
 
         if(rangeScheduleTime && rangeScheduleTime.length > 0){
             let selectedTime = rangeScheduleTime.filter(item => item.isSelected == true)
-            selectedTime.map((schedule) => {
-                let obj = {}
-                obj.doctorId = selectedDoctor.value
-                obj.date = formatDate
-                obj.time = schedule.keyMap
-                result.push(obj)
-            })
+            if(selectedTime && selectedTime.length >0){
+                selectedTime.forEach((schedule) => {
+                    let obj = {}
+                    obj.doctorId = selectedDoctor.value
+                    obj.date = formatDate
+                    obj.time = schedule.keyMap
+                    result.push(obj)
+                })
+            }else{
+                toast.error("Schedule time is require");
+                return;
+            }
         }
 
         console.log("Check selected time: ",result)
