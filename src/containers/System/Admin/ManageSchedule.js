@@ -8,6 +8,7 @@ import { LANGUAGES,dateFormat } from '../../../utils';
 import DatePicker from '../../../components/Input/DatePicker';
 import { toast } from 'react-toastify';
 import moment from 'moment';
+import { bulkCreateScheduleService } from '../../../services/userService';
 
 
 
@@ -100,7 +101,7 @@ class ManageSchedule extends Component {
         // console.log("Check range time after: ",rangeScheduleTime)
     } 
 
-    handleSaveTime = () => {
+    handleSaveTime = async () => {
         let {selectedDoctor, rangeScheduleTime, currentDate} = this.state
         let result = []
         if(!selectedDoctor){
@@ -112,8 +113,8 @@ class ManageSchedule extends Component {
             toast.error('Select date is require');
             return;
         }
-
-        let formatDate = moment(currentDate).format(dateFormat.SEND_TO_SERVER)
+        // moment(currentDate).format(dateFormat.SEND_TO_SERVER)
+        let formatDate = new Date(currentDate).getTime();
 
         if(rangeScheduleTime && rangeScheduleTime.length > 0){
             let selectedTime = rangeScheduleTime.filter(item => item.isSelected == true)
@@ -122,7 +123,7 @@ class ManageSchedule extends Component {
                     let obj = {}
                     obj.doctorId = selectedDoctor.value
                     obj.date = formatDate
-                    obj.time = schedule.keyMap
+                    obj.timeType = schedule.keyMap
                     result.push(obj)
                 })
             }else{
@@ -131,7 +132,14 @@ class ManageSchedule extends Component {
             }
         }
 
+        let res = await bulkCreateScheduleService({
+            arrSchedule: result,
+            doctorId: selectedDoctor.value,
+            formatDate: formatDate
+        })
+
         console.log("Check selected time: ",result)
+        console.log("Check bulkCreateScheduleService: ",res)
     }
 
     render() {

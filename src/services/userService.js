@@ -44,6 +44,10 @@ let getDoctorInfoDetailService = (inputId) => {
     return axios.get(`/api/get-detail-doctor-by-id?id=${inputId}`)
 }
 
+let bulkCreateScheduleService = (data) => {
+    return axios.post("/api/bulk-create-schedule",data)
+}
+
 export {
     handleLogin, 
     getAllUsers,
@@ -54,5 +58,6 @@ export {
     getDoctor,
     getAllDoctorService,
     postInfoDoctorService,
-    getDoctorInfoDetailService
+    getDoctorInfoDetailService,
+    bulkCreateScheduleService
 }
