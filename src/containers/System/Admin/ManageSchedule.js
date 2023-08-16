@@ -4,10 +4,9 @@ import './ManageSchedule.scss'
 
 import * as actions from '../../../store/actions'
 import Select from 'react-select';
-import { LANGUAGES,dateFormat } from '../../../utils';
+import { LANGUAGES } from '../../../utils';
 import DatePicker from '../../../components/Input/DatePicker';
 import { toast } from 'react-toastify';
-import moment from 'moment';
 import { bulkCreateScheduleService } from '../../../services/userService';
 
 
@@ -137,9 +136,9 @@ class ManageSchedule extends Component {
             doctorId: selectedDoctor.value,
             formatDate: formatDate
         })
-
-        console.log("Check selected time: ",result)
-        console.log("Check bulkCreateScheduleService: ",res)
+        toast.success('Save schedule succeed');
+        // console.log("Check selected time: ",result)
+        // console.log("Check bulkCreateScheduleService: ",res)
     }
 
     render() {

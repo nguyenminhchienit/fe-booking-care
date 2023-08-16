@@ -48,6 +48,10 @@ let bulkCreateScheduleService = (data) => {
     return axios.post("/api/bulk-create-schedule",data)
 }
 
+let getScheduleDoctorService = (date, doctorId) => {
+    return axios.get(`/api/get-schedule-doctor?doctorId=${doctorId}&date=${date}`)
+}
+
 export {
     handleLogin, 
     getAllUsers,
@@ -59,5 +63,6 @@ export {
     getAllDoctorService,
     postInfoDoctorService,
     getDoctorInfoDetailService,
-    bulkCreateScheduleService
+    bulkCreateScheduleService,
+    getScheduleDoctorService
 }

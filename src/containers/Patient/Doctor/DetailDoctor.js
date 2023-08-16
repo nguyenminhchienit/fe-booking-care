@@ -4,8 +4,9 @@ import Header from '../../HomePage/Header';
 import './DetailDoctor.scss'
 import {getDoctorInfoDetailService} from '../../../services/userService'
 import { LANGUAGES } from '../../../utils';
+import DoctorSchedule from './DoctorSchedule';
 
-class System extends Component {
+class DetailDoctor extends Component {
     constructor(props){
         super(props)
         this.state = {
@@ -53,8 +54,16 @@ class System extends Component {
                             }
                         </div>
                     </div>
-                    <div className='doctor-calendar'>
-
+                    <div className='doctor-schedule'>
+                        <div className="content-left">
+                            <DoctorSchedule 
+                                doctorIdFromParent = {this.state.detailDoctor && this.state.detailDoctor.id ?
+                                this.state.detailDoctor.id : -1}
+                            />
+                        </div>
+                        <div className="content-right">
+                            
+                        </div>
                     </div>
                     <div className='doctor-info-detail'>
                         {this.state.detailDoctor && this.state.detailDoctor.Markdown && this.state.detailDoctor.Markdown.contentHTML &&
@@ -81,4 +90,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(System);
+export default connect(mapStateToProps, mapDispatchToProps)(DetailDoctor);
