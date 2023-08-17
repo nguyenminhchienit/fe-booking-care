@@ -12,7 +12,8 @@ class DoctorSchedule extends Component {
     constructor(props){
         super(props)
         this.state = {
-            allDays: []
+            allDays: [],
+            allTimes: [],
         }
     }
 
@@ -40,9 +41,6 @@ class DoctorSchedule extends Component {
 
             arrDate.push(obj)
         }
-
-
-        console.log("allDate: ",arrDate)
         this.setState({
             allDays: arrDate
         })
@@ -59,6 +57,9 @@ class DoctorSchedule extends Component {
         if(this.props.doctorIdFromParent && this.props.doctorIdFromParent !== -1){
             res = await getScheduleDoctorService(e.target.value,this.props.doctorIdFromParent)
             console.log(res)
+            this.setState({
+                allTimes: res.data
+            })
         }
     }
     render() {
@@ -75,7 +76,27 @@ class DoctorSchedule extends Component {
                         </select>
                    </div>
                    <div className='allTimes'>
+                        <div className='text-calendar'>
+                            <i class="fas fa-calendar-alt"></i>
+                            <span className='text-schedule'>
+                                Lịch Khám
+                            </span>
+                        </div>
+                        <div className='schedule-available'>
+                            {this.state.allTimes && this.state.allTimes.length > 0 ?
+                                this.state.allTimes.map((item,index) => {
+                                    let valueSchedule = LANGUAGES.VI === this.props.language ? item.timeTypeData.valueVI : item.timeTypeData.valueEN
+                                    return (
+                                        <button className={LANGUAGES.VI === this.props.language ? 'btn-schedule' : 'btn-schedule en'} key={index}>{valueSchedule}</button>
+                                    )
+                                }) 
+                                : 
+                                <div className='default-schedule'> 
+                                    Lịch khám cho ngày này chưa có.
+                                </div>
+                            }
 
+                        </div>
                    </div>
                 </div>
             </React.Fragment>

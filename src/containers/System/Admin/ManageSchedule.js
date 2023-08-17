@@ -141,6 +141,13 @@ class ManageSchedule extends Component {
         // console.log("Check bulkCreateScheduleService: ",res)
     }
 
+    getPreviousDay = (date = new Date()) => {
+        const previous = new Date(date.getTime());
+        previous.setDate(date.getDate() - 1);
+      
+        return previous;
+      }
+
     render() {
         // console.log("Check date: ",this.state.rangeScheduleTime)
         return (
@@ -165,7 +172,7 @@ class ManageSchedule extends Component {
                                     onChange = {this.onChangePickerDate}
                                     className="form-control"
                                     value={this.state.currentDate} //currentDate[0]: phan tu thu 0 moi tra ve dung ding dang ngay
-                                    minDate={new Date()}
+                                    minDate={this.getPreviousDay()}
                                 />
                             </div>
                             <div className='col-12 manage-schedule'>
