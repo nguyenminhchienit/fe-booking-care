@@ -136,7 +136,11 @@ class ManageSchedule extends Component {
             doctorId: selectedDoctor.value,
             formatDate: formatDate
         })
-        toast.success('Save schedule succeed');
+        if(res && res.errCode === 0){
+            toast.success('Save schedule succeed');
+        }else{
+            toast.error('Save schedule failed');
+        }
         // console.log("Check selected time: ",result)
         // console.log("Check bulkCreateScheduleService: ",res)
     }

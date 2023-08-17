@@ -20,12 +20,16 @@ class DoctorSchedule extends Component {
     componentDidMount(){
         let {language} = this.props;
 
-        this.setArrDayLanguage(language)
+        let arrDate = this.getArrDayLanguage(language)
+        console.log("check arr date: ",arrDate)
+        this.setState({
+            allDays: arrDate
+        })
     }
 
     
 
-    setArrDayLanguage = async (language) => {
+    getArrDayLanguage = (language) => {
         console.log(moment(new Date()).format('dddd - DD/MM'))
         console.log(moment(new Date()).locale('en').format('ddd - DD/MM'))
 
@@ -33,22 +37,44 @@ class DoctorSchedule extends Component {
         for(let i=0;i<7;i++){
             let obj = {};
             if(LANGUAGES.VI === language){
-                obj.label = moment(new Date()).add(i,'days').format('dddd - DD/MM')
+                if(i===0){
+                    let ddMM = moment(new Date()).format('DD/MM')
+                    let today = `Hôm nay - ${ddMM}`
+                    obj.label = today
+                }else{
+                    obj.label = moment(new Date()).add(i,'days').format('dddd - DD/MM')
+                }
             }else{
-                obj.label = moment(new Date()).add(i,'days').locale('en').format('ddd - DD/MM')
+                if(i===0){
+                    let ddMM = moment(new Date()).format('DD/MM')
+                    let today = `Today - ${ddMM}`
+                    obj.label = today
+                }else{
+                    obj.label = moment(new Date()).add(i,'days').locale('en').format('ddd - DD/MM')
+                }
             }
             obj.value = moment(new Date()).add(i,'days').startOf('day').valueOf()
 
             arrDate.push(obj)
         }
-        this.setState({
-            allDays: arrDate
-        })
+        return arrDate;
     }
 
-    componentDidUpdate(prevProps,prevState, snapshot){
+    async componentDidUpdate(prevProps,prevState, snapshot){
         if(this.props.language !== prevProps.language){
-            this.setArrDayLanguage(this.props.language)
+            let arrDate = this.getArrDayLanguage(this.props.language)
+            this.setState({
+                allDays: arrDate
+            })
+        }
+        if(this.props.doctorIdFromParent !== prevProps.doctorIdFromParent){
+            let arrDate = this.getArrDayLanguage(this.props.language)
+            if(arrDate && arrDate.length > 0){
+                let res = await getScheduleDoctorService(arrDate[0].value,this.props.doctorIdFromParent)
+                this.setState({
+                    allTimes: res.data
+                })
+            }
         }
     }
 
@@ -58,7 +84,7 @@ class DoctorSchedule extends Component {
             res = await getScheduleDoctorService(e.target.value,this.props.doctorIdFromParent)
             console.log(res)
             this.setState({
-                allTimes: res.data
+                allTimes: res.data ? res.data : []
             })
         }
     }
@@ -96,6 +122,11 @@ class DoctorSchedule extends Component {
                                 </div>
                             }
 
+                        </div>
+                        <div className={this.state.allTimes && this.state.allTimes.length > 0 ? 'hasMore' : 'moreDisable'}>
+                            <span className='more-text'>Chọn </span>
+                            <i class="fas fa-hand-point-up"></i>
+                            <span className='more-text'> và đặt miễn phí</span>
                         </div>
                    </div>
                 </div>
