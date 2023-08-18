@@ -5,6 +5,7 @@ import './DetailDoctor.scss'
 import {getDoctorInfoDetailService} from '../../../services/userService'
 import { LANGUAGES } from '../../../utils';
 import DoctorSchedule from './DoctorSchedule';
+import DoctorExtraInfo from './DoctorExtraInfo';
 
 class DetailDoctor extends Component {
     constructor(props){
@@ -63,7 +64,10 @@ class DetailDoctor extends Component {
                             />
                         </div>
                         <div className="content-right">
-                            
+                            <DoctorExtraInfo 
+                                doctorIdFromParent = {this.state.detailDoctor && this.state.detailDoctor.id ?
+                                this.state.detailDoctor.id : -1}
+                            />
                         </div>
                     </div>
                     <div className='doctor-info-detail'>

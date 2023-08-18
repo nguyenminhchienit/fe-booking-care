@@ -42,12 +42,17 @@
     }
 
     .doctor-schedule{
+        display: flex;
         border-bottom: 1px solid #a4b0be;
         padding: 0 60px;
        
         .content-left{
             width: 50%;
             border-right: 1px solid #45c3d2;
+            padding-bottom: 30px;
+        }
+        .content-right{
+            width: 50%;
             padding-bottom: 30px;
         }
     }
