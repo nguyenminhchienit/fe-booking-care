@@ -56,6 +56,10 @@ let getExtraDoctorInfoService = (doctorId) => {
     return axios.get(`/api/get-extra-doctor-info-by-id?doctorId=${doctorId}`)
 }
 
+let getProfileDoctorByIdService = (doctorId) => {
+    return axios.get(`/api/get-profile-doctor-by-id?doctorId=${doctorId}`)
+}
+
 export {
     handleLogin, 
     getAllUsers,
@@ -69,5 +73,6 @@ export {
     getDoctorInfoDetailService,
     bulkCreateScheduleService,
     getScheduleDoctorService,
-    getExtraDoctorInfoService
+    getExtraDoctorInfoService,
+    getProfileDoctorByIdService
 }

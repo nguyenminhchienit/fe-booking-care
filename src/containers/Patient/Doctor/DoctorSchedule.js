@@ -15,7 +15,8 @@ class DoctorSchedule extends Component {
         this.state = {
             allDays: [],
             allTimes: [],
-            isOpenModal: false
+            isOpenModal: false,
+            dateTimeSelect: {} 
         }
     }
 
@@ -93,7 +94,8 @@ class DoctorSchedule extends Component {
 
     handleShowModal = (time) => {
         this.setState({
-            isOpenModal: true
+            isOpenModal: true,
+            dateTimeSelect: time
         })
     }
 
@@ -154,6 +156,7 @@ class DoctorSchedule extends Component {
                 <BookingModal 
                     isOpenModal={this.state.isOpenModal}
                     handleHideModal={this.handleHideModal}
+                    dateTime={this.state.dateTimeSelect}
                 />
             </React.Fragment>
         );

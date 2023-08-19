@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import './BookingModal.scss'
 import {Modal} from 'reactstrap';
+import ProfileDoctor from '../ProfileDoctor';
+
+
 
 class BookingModal extends Component {
     constructor(props){
@@ -22,7 +25,8 @@ class BookingModal extends Component {
 
 
     render() {
-        let {handleHideModal} = this.props
+        let {handleHideModal,dateTime} = this.props
+        console.log("Check dateTime props: ",dateTime)
         return (
             <React.Fragment>
                <div className='booking-modal-container'>
@@ -37,34 +41,40 @@ class BookingModal extends Component {
                                     onClick={() => handleHideModal()}
                                 ></i>
                             </div>
-                            <div className='booking-modal-body row p-3'>
-                                <div className='col-6 form-group'>
-                                    <label>Họ và tên</label>
-                                    <input className='form-control'></input>
+                            <div className='booking-modal-body '>
+                                <div className='intro-doctor-modal'>
+                                    <ProfileDoctor doctorId={dateTime.doctorId}/>
                                 </div>
-                                <div className='col-6 form-group'>
-                                    <label>Số điện thoại</label>
-                                    <input className='form-control'></input>
-                                </div>
-                                <div className='col-6 form-group'>
-                                    <label>Email</label>
-                                    <input className='form-control'></input>
-                                </div>
-                                <div className='col-6 form-group'>
-                                    <label>Địa chỉ liên hệ</label>
-                                    <input className='form-control'></input>
-                                </div>
-                                <div className='col-6 form-group'>
-                                    <label>Đặt cho ai</label>
-                                    <input className='form-control'></input>
-                                </div>
-                                <div className='col-6 form-group'>
-                                    <label>Giới tính</label>
-                                    <input className='form-control'></input>
-                                </div>
-                                <div className='col-12 form-group'>
-                                    <label>Lý do khám</label>
-                                    <input className='form-control'></input>
+                                
+                                <div className='form-doctor row p-3'>
+                                    <div className='col-6 form-group'>
+                                        <label>Họ và tên</label>
+                                        <input className='form-control'></input>
+                                    </div>
+                                    <div className='col-6 form-group'>
+                                        <label>Số điện thoại</label>
+                                        <input className='form-control'></input>
+                                    </div>
+                                    <div className='col-6 form-group'>
+                                        <label>Email</label>
+                                        <input className='form-control'></input>
+                                    </div>
+                                    <div className='col-6 form-group'>
+                                        <label>Địa chỉ liên hệ</label>
+                                        <input className='form-control'></input>
+                                    </div>
+                                    <div className='col-6 form-group'>
+                                        <label>Đặt cho ai</label>
+                                        <input className='form-control'></input>
+                                    </div>
+                                    <div className='col-6 form-group'>
+                                        <label>Giới tính</label>
+                                        <input className='form-control'></input>
+                                    </div>
+                                    <div className='col-12 form-group'>
+                                        <label>Lý do khám</label>
+                                        <input className='form-control'></input>
+                                    </div>
                                 </div>
                             </div>
                             <div className='booking-modal-footer'>
