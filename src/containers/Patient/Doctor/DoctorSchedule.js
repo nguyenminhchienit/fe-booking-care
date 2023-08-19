@@ -7,6 +7,7 @@ import localization from 'moment/locale/vi'
 import {getScheduleDoctorService} from '../../../services/userService'
 
 import { LANGUAGES } from '../../../utils';
+import BookingModal from './Modal/BookingModal';
 
 class DoctorSchedule extends Component {
     constructor(props){
@@ -14,6 +15,7 @@ class DoctorSchedule extends Component {
         this.state = {
             allDays: [],
             allTimes: [],
+            isOpenModal: false
         }
     }
 
@@ -88,6 +90,18 @@ class DoctorSchedule extends Component {
             })
         }
     }
+
+    handleShowModal = (time) => {
+        this.setState({
+            isOpenModal: true
+        })
+    }
+
+    handleHideModal = () => {
+        this.setState({
+            isOpenModal: false
+        })
+    }
     render() {
         return (
             <React.Fragment>
@@ -113,7 +127,13 @@ class DoctorSchedule extends Component {
                                 this.state.allTimes.map((item,index) => {
                                     let valueSchedule = LANGUAGES.VI === this.props.language ? item.timeTypeData.valueVI : item.timeTypeData.valueEN
                                     return (
-                                        <button className={LANGUAGES.VI === this.props.language ? 'btn-schedule' : 'btn-schedule en'} key={index}>{valueSchedule}</button>
+                                        <button 
+                                            className={LANGUAGES.VI === this.props.language ? 'btn-schedule' : 'btn-schedule en'} 
+                                            key={index}
+                                            onClick={() => this.handleShowModal(item)}
+                                        >
+                                            {valueSchedule}
+                                        </button>
                                     )
                                 }) 
                                 : 
@@ -130,6 +150,11 @@ class DoctorSchedule extends Component {
                         </div>
                    </div>
                 </div>
+
+                <BookingModal 
+                    isOpenModal={this.state.isOpenModal}
+                    handleHideModal={this.handleHideModal}
+                />
             </React.Fragment>
         );
     }
