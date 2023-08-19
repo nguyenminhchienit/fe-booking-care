@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import './DoctorExtraInfo.scss'
+import {getExtraDoctorInfoService} from '../../../services/userService'
 
+import NumberFormat from 'react-number-format';
+import { LANGUAGES } from '../../../utils';
 
 class DoctorExtraInfo extends Component {
     constructor(props){
         super(props)
         this.state = {
-            isShowPopup: true
+            isShowPopup: true,
+            doctorInfo: {}
         }
     }
 
@@ -15,11 +19,16 @@ class DoctorExtraInfo extends Component {
         
     }
 
-    
-
    
     async componentDidUpdate(prevProps,prevState, snapshot){
-       
+        if(this.props.doctorIdFromParent !== prevProps.doctorIdFromParent){
+                let res = await getExtraDoctorInfoService(this.props.doctorIdFromParent)
+                if(res && res.errCode === 0){
+                    this.setState({
+                        doctorInfo: res.data
+                    })
+                }
+        }
     }
 
     handleShowHidePrice = (value) => {
@@ -29,6 +38,7 @@ class DoctorExtraInfo extends Component {
     }
    
     render() {
+        console.log("Check state: ",this.state)
         return (
             <React.Fragment>
                <div className='doctor-extra-container'>
@@ -37,10 +47,10 @@ class DoctorExtraInfo extends Component {
                             ĐỊA CHỈ KHÁM
                         </div>
                         <div className='clinic-name'>
-                            Phòng khám Bệnh viện Đại học Y Dược 1
+                            {this.state.doctorInfo.nameClinic}
                         </div>
                         <div className='address-name'>
-                            20-22 Dương Quang Trung, Phường 12, Quận 10, Tp. HCM
+                            {this.state.doctorInfo.addressClinic}
                         </div>
                     </div>
                     <div className='doctor-extra-down'>
@@ -49,7 +59,24 @@ class DoctorExtraInfo extends Component {
                                 <span className='price-name'>
                                     GIÁ KHÁM: 
                                 </span>
-                                <span className='price'>250.000đ - 500.000đ</span>
+                                <span className='price'>
+                                {this.state.doctorInfo && this.state.doctorInfo.priceTypeData && this.props.language === LANGUAGES.VI 
+                                   && <NumberFormat 
+                                        value={this.state.doctorInfo.priceTypeData.valueVI} 
+                                        displayType={'text'} 
+                                        thousandSeparator={true} 
+                                        suffix={' VND'} 
+                                    />
+                                }
+                                {this.state.doctorInfo && this.state.doctorInfo.priceTypeData && this.props.language === LANGUAGES.EN 
+                                   && <NumberFormat 
+                                        value={this.state.doctorInfo.priceTypeData.valueEN} 
+                                        displayType={'text'} 
+                                        thousandSeparator={true} 
+                                        suffix={'$'} 
+                                    />
+                                }
+                                </span>
                                 <span 
                                     className='more'
                                     onClick={() => this.handleShowHidePrice(false)}
@@ -65,15 +92,32 @@ class DoctorExtraInfo extends Component {
                                 <div className='more-container'>
                                     <div className='detail-price'>
                                         <span className='clinic-price'>Giá khám</span>
-                                        <span className='price-more'>250.000đ - 500.000đ</span>
+                                        <span className='price-more'>
+                                            {this.state.doctorInfo && this.state.doctorInfo.priceTypeData && this.props.language === LANGUAGES.VI 
+                                                && <NumberFormat 
+                                                        value={this.state.doctorInfo.priceTypeData.valueVI} 
+                                                        displayType={'text'} 
+                                                        thousandSeparator={true} 
+                                                        suffix={' VND'} 
+                                                    />
+                                            }
+                                            {this.state.doctorInfo && this.state.doctorInfo.priceTypeData && this.props.language === LANGUAGES.EN 
+                                            && <NumberFormat 
+                                                    value={this.state.doctorInfo.priceTypeData.valueEN} 
+                                                    displayType={'text'} 
+                                                    thousandSeparator={true} 
+                                                    suffix={'$'} 
+                                                />
+                                            }
+                                        </span>
                                     </div>
                                     <div className='more-desc'>
-                                        Giá tư vấn 15 phút: 250.000vnđ <br/>
-                                        Giá tư vấn 30 phút: 500.000vnđ
+                                        {this.state.doctorInfo.note}
                                     </div>
                                 </div>
                                 <div className='payment'>
-                                    Phòng khám có thanh toán bằng hình thức tiền mặt và quẹt thẻ
+                                    Phòng khám có thanh toán bằng hình thức: 
+                                    <span> {this.state.doctorInfo.paymentTypeData.valueVI}</span>
                                 </div>
                                 <div className='hide-table' onClick={() => this.handleShowHidePrice(true)}>Ẩn bảng giá</div>
                             </div>
