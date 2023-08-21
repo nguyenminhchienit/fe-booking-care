@@ -116,7 +116,7 @@ class ManageSchedule extends Component {
         let formatDate = new Date(currentDate).getTime();
 
         if(rangeScheduleTime && rangeScheduleTime.length > 0){
-            let selectedTime = rangeScheduleTime.filter(item => item.isSelected == true)
+            let selectedTime = rangeScheduleTime.filter(item => item.isSelected === true)
             if(selectedTime && selectedTime.length >0){
                 selectedTime.forEach((schedule) => {
                     let obj = {}

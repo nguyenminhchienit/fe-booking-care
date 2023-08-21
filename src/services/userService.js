@@ -60,6 +60,10 @@ let getProfileDoctorByIdService = (doctorId) => {
     return axios.get(`/api/get-profile-doctor-by-id?doctorId=${doctorId}`)
 }
 
+let postPatientAppointmentService = (data) => {
+    return axios.post('/api/post-book-appointment',data)
+}
+
 export {
     handleLogin, 
     getAllUsers,
@@ -74,5 +78,6 @@ export {
     bulkCreateScheduleService,
     getScheduleDoctorService,
     getExtraDoctorInfoService,
-    getProfileDoctorByIdService
+    getProfileDoctorByIdService,
+    postPatientAppointmentService
 }
