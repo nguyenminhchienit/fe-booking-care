@@ -10,6 +10,7 @@ import * as actions from '../../../../store/actions'
 import _ from 'lodash'
 import { postPatientAppointmentService } from '../../../../services/userService';
 import { toast } from 'react-toastify';
+import moment from 'moment';
 
 
 class BookingModal extends Component {
@@ -79,9 +80,37 @@ class BookingModal extends Component {
         })
     }
 
+    buildTimeBooking = (dateTime) => {
+        let {language} = this.props;
+        if(dateTime && !_.isEmpty(dateTime)){
+            let time = language === LANGUAGES.VI ? dateTime.timeTypeData.valueVI : dateTime.timeTypeData.valueEN
+
+            let date = language === LANGUAGES.VI ? 
+                moment.unix(+dateTime.date / 1000).format('dddd - DD/MM/YYYY') 
+                : 
+                moment.unix(+dateTime.date / 1000).locale('en').format('ddd - MM/DD/YYYY')
+            return `${time} - ${date}`
+        }
+        return ''
+    }
+
+    buildDoctorName = (dateTime) => {
+        let {language} = this.props;
+        if(dateTime && !_.isEmpty(dateTime)){
+           let doctorName = language === LANGUAGES.VI ?
+                `${dateTime.doctorData.firstName} ${dateTime.doctorData.lastName}`  
+                :
+                `${dateTime.doctorData.lastName} ${dateTime.doctorData.firstName}`
+            return doctorName
+        }
+        return ''
+    }
+
     handleSubmitModal = async () => {
         // console.log("Check state submit booking modal: ",this.state)
         let date = new Date(this.state.birthday).getTime();
+        let timeString = this.buildTimeBooking(this.props.dateTime)
+        let doctorName = this.buildDoctorName(this.props.dateTime)
         let res = await postPatientAppointmentService({
             fullName: this.state.fullName,
             phoneNumber: this.state.phoneNumber,
@@ -91,7 +120,10 @@ class BookingModal extends Component {
             reason: this.state.reason,
             selectedGender: this.state.selectedGender.value,
             doctorId: this.state.doctorId,
-            timeType: this.state.timeType
+            timeType: this.state.timeType,
+            language: this.props.language,
+            timeString: timeString,
+            doctorName: doctorName
         })
         if(res && res.errCode === 0){
             toast.success('Booking appointment succeed!')
@@ -127,7 +159,7 @@ class BookingModal extends Component {
 
     render() {
         let {handleHideModal,dateTime} = this.props
-        // console.log("Check dateTime props: ",dateTime)
+        console.log("Check dateTime props: ",dateTime)
         return (
             <React.Fragment>
                <div className='booking-modal-container'>
