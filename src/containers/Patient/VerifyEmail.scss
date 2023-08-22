@@ -1,0 +1,23 @@
+.verify-email-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .verify-success{
+            height: 90vh;
+            width: 80vw;
+            background-image: url('../../assets/images/verifySuccess.png');
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            object-fit: cover;
+    }
+    .verify-failed{
+        height: 90vh;
+        width: 80vw;
+        background-image: url('../../assets/images/verifyFailed.png');
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        object-fit: cover;
+    }
+}

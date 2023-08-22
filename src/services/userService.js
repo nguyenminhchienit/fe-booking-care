@@ -64,6 +64,12 @@ let postPatientAppointmentService = (data) => {
     return axios.post('/api/post-book-appointment',data)
 }
 
+let postVerifyAppointmentService = (data) => {
+    return axios.post('/api/verify-book-appointment',data)
+}
+
+
+
 export {
     handleLogin, 
     getAllUsers,
@@ -79,5 +85,6 @@ export {
     getScheduleDoctorService,
     getExtraDoctorInfoService,
     getProfileDoctorByIdService,
-    postPatientAppointmentService
+    postPatientAppointmentService,
+    postVerifyAppointmentService
 }
