@@ -68,6 +68,10 @@ let postVerifyAppointmentService = (data) => {
     return axios.post('/api/verify-book-appointment',data)
 }
 
+let postCreateNewSpecialtyService = (data) => {
+    return axios.post('/api/create-new-specialty',data)
+}
+
 
 
 export {
@@ -86,5 +90,7 @@ export {
     getExtraDoctorInfoService,
     getProfileDoctorByIdService,
     postPatientAppointmentService,
-    postVerifyAppointmentService
+    postVerifyAppointmentService,
+    postCreateNewSpecialtyService
+
 }
