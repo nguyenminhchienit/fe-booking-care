@@ -156,8 +156,8 @@ class ManageDoctor extends Component {
         let doctorInfo = res.data.DoctorInfo
         if(res && res.errCode === 0 && res.data && res.data.Markdown && res.data.Markdown.description 
             && res.data.Markdown.contentHTML && res.data.Markdown.contentMarkdown
-            && doctorInfo.priceId && doctorInfo.provinceId && doctorInfo.paymentId && doctorInfo.note 
-            && doctorInfo.addressClinic && doctorInfo.nameClinic && doctorInfo.specialtyId
+            // && doctorInfo.priceId && doctorInfo.provinceId && doctorInfo.paymentId && doctorInfo.note 
+            // && doctorInfo.addressClinic && doctorInfo.nameClinic && doctorInfo.specialtyId
              ){
             let markdown = res.data.Markdown
             let findPrice = listPrice.find(item => {

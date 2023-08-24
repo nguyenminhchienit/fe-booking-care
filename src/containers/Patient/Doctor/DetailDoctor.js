@@ -30,7 +30,7 @@ class DetailDoctor extends Component {
     }
     render() {
         //Lay id tu link trinh duyet
-        console.log(this.props.match.params.id)
+        // console.log(this.props.match.params.id)
         let nameVI,nameEN;
         if(this.state.detailDoctor && this.state.detailDoctor.positionData){
             nameVI = `${this.state.detailDoctor.positionData.valueVI}, ${this.state.detailDoctor.firstName} ${this.state.detailDoctor.lastName}`
