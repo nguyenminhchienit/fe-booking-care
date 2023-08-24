@@ -46,25 +46,27 @@ class DetailSpecialty extends Component {
     }
 
     handleChangSelectProvince = async (e) => {
-        console.log("Change e: ",e.target.value)
-        let res = await getSpecialtyDoctorById({
-            id: this.props.match.params.id,
-            location: e.target.value
-        })
-        
-        if(res && res.errCode === 0 ){
-            this.setState({
-                arrDoctorId: res.data.doctorSpecialty
-            },() => {
-                console.log("Check handle change: ",this.state.arrDoctorId)
+        // console.log("Change e: ",e.target.value)
+        if(this.props.match && this.props.match.params && this.props.match.params.id){
+            let res = await getSpecialtyDoctorById({
+                id: this.props.match.params.id,
+                location: e.target.value
             })
+            
+            if(res && res.errCode === 0 ){
+                this.setState({
+                    arrDoctorId: res.data.doctorSpecialty
+                },() => {
+                    console.log("Check handle change: ",this.state.arrDoctorId)
+                })
+            }
         }
     }
 
     render() {
         let {listProvince} = this.state
         let {lang} = this.props
-        console.log("Check state doctorID: ",this.state.arrDoctorId)
+        // console.log("Check state doctorID: ",this.state.arrDoctorId)
         return (
             <React.Fragment>
                 <Header/>
@@ -79,8 +81,8 @@ class DetailSpecialty extends Component {
                         >{this.state.isMore === true ? <span>Xem thêm</span> : <span>Ẩn chi tiết</span>}</span>
                     </div>
                     <div className='search-specialty-province'>
-                        <select onChange={(e) => this.handleChangSelectProvince(e)}>
-                            <option value='ALL'>Tất cả</option>
+                        <select onChange={(e) => this.handleChangSelectProvince(e)} className='select-wrapper'>
+                            <option value='ALL' className='option-select'>Tất cả</option>
                             {listProvince && listProvince.length > 0 &&
                             listProvince.map((item,index) => {
                                 return (
@@ -96,8 +98,11 @@ class DetailSpecialty extends Component {
                         return (
                             <div className='each-doctor' key={index}>
                                 <div className='content-left-item'>
-                                    <ProfileDoctor doctorId={item.doctorId}/>
-                                    {console.log("doctorID: ",item.doctorId)}
+                                    <ProfileDoctor 
+                                        doctorId={item.doctorId}
+                                        isMoreInfo={true}
+                                    />
+                                    
                                 </div>
                                 <div className='content-right-item'>
                                     <div className='doctor-schedule'>

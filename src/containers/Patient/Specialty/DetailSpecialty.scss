@@ -4,6 +4,15 @@
     .search-specialty-province{
         margin-top: 20px;
         margin-left: 70px;
+
+        .select-wrapper{
+            border: 1px solid #45c3d2;
+            outline: none;
+            padding: 4px 8px;
+            color: #45c3d2;
+            border-radius: 5px;
+            font-weight: 600;
+        }
     }
     .specialty-desc{
         padding: 10px 80px;
