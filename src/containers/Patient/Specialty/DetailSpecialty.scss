@@ -1,9 +1,37 @@
 .specialty-detail-container{
     margin-top: 80px;
 
+    .search-specialty-province{
+        margin-top: 20px;
+        margin-left: 70px;
+    }
     .specialty-desc{
-        height: 200px;
-        border: 1px solid red;
+        padding: 10px 80px;
+        margin: 0 auto;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        display: flex;
+        justify-content: space-between;
+        overflow: hidden;
+        transition: all 0.5s;
+
+        .more{
+            margin: auto 0;
+            min-width: 80px;
+            min-height: 40px;
+            background-color: #45c3d2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 500;
+            color: white;
+            cursor: pointer;
+        }
+    }
+
+    .specialty-desc.extra-more{
+        height: 240px;
     }
 
     .each-doctor{
@@ -16,19 +44,16 @@
         margin: 20px auto;
         width: 1140px;
         .content-left-item{
-            width: 50%;
+            width: 60%;
             display: flex;
             align-items: center;
             border-right: 1px solid #45c3d2;
         }
 
         .content-right-item{
-            width: 50%;
+            width: 40%;
             padding: 10px;
-            .doctor-schedule{
-
-            }
-
+        
             .doctor-extra-info{
                 border-top: 1px solid #45c3d2;
                 margin-top: 10px;

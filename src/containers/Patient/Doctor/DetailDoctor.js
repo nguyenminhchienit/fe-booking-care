@@ -19,7 +19,6 @@ class DetailDoctor extends Component {
     async componentDidMount(){
         if(this.props.match && this.props.match.params && this.props.match.params.id){
             let res = await getDoctorInfoDetailService(this.props.match.params.id)
-            // console.log('Check detail info dotor res: ', res)
             if(res && res.errCode === 0){
                 this.setState({
                     detailDoctor: res.data

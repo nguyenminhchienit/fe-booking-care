@@ -16,6 +16,7 @@ class ProfileDoctor extends Component {
     }
 
     async componentDidMount(){
+        console.log("Check props from spe: ",this.props.doctorId)
         let res = await getProfileDoctorByIdService(this.props.doctorId)
         if(res && res.errCode === 0){
             this.setState({
@@ -26,7 +27,14 @@ class ProfileDoctor extends Component {
 
    
     async componentDidUpdate(prevProps,prevState, snapshot){
-        
+        if(this.props.doctorId !== prevProps.doctorId){
+            let res = await getProfileDoctorByIdService(this.props.doctorId)
+            if(res && res.errCode === 0){
+                this.setState({
+                    doctorProfile: res.data
+                })
+            }
+        }
     }
 
    
