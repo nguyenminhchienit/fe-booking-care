@@ -1,7 +1,6 @@
 .seation-facility{
     height: 320px;
     background-color: #ffffff;
-    // border-top: 1px solid #45c3d2;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 
     .facility-container{
@@ -42,22 +41,22 @@
 
     .facility-body{
         margin: 0 auto;
+        cursor: pointer;
         .facility-thumb{
             height: 168px;
             width: 268px;
-            background-image: url('../../../assets/speciality/facility.jpg');
+            // background-image: url('../../../assets/speciality/facility.jpg');
             background-position: center center;
             background-repeat: no-repeat;
-            background-size: cover;
+            background-size: contain;
             object-fit: cover;
             box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
         }
 
         .sub-title-facility{
             margin-top: 20px;
-            font-size: 16px;
-            font-weight: 500;
             color: #111111;
+            font-size: 16px;
 
             &:hover{
                 color: #45c3d2;

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import './DetailClinic.scss'
 import Header from '../../HomePage/Header';
 import Footer from '../../HomePage/Section/Footer'
-import {getSpecialtyDoctorById,getAllCodeService} from '../../../services/userService'
+import {getClinicDoctorById} from '../../../services/userService'
 
 
 class DetailClinic extends Component {
@@ -11,43 +11,40 @@ class DetailClinic extends Component {
     constructor(props){
         super(props)
         this.state = {
-            arrDoctorId: [],
-            dataDetailClinic: {},
+            arrDoctorId: '',
+            dataDetailClinic: "",
         }
     }
 
-    // async componentDidMount(){
-    //     if(this.props.match && this.props.match.params && this.props.match.params.id){
-    //         let res = await getSpecialtyDoctorById({
-    //             id: this.props.match.params.id,
-    //             location: 'ALL'
-    //         })
+    async componentDidMount(){
+        if(this.props.match && this.props.match.params && this.props.match.params.id){
+            let res = await getClinicDoctorById({
+                id: this.props.match.params.id,
+            })
 
-    //         let resProvince = await getAllCodeService('PROVINCE');
-    //         if(res && res.errCode === 0 && resProvince && resProvince.errCode === 0){
-    //             this.setState({
-    //                 arrDoctorId: res.data.doctorSpecialty,
-    //                 dataDetailClinic: res.data,
-    //                 listProvince: resProvince.data
-    //             })
-    //         }
+           
+            if(res && res.errCode === 0 ){
+                this.setState({
+                    arrDoctorId: res.data.doctorSpecialty,
+                    dataDetailClinic: res.data,
+                })
+            }
 
-    //     }
-    // }
+        }
+    }
 
 
 
     render() {
-        // console.log("Check state doctorID: ",this.state.arrDoctorId)
         return (
             <React.Fragment>
                 <Header/>
                 <div className='specialty-detail-container'>
-                    {/* <div className={this.state.isMore === true ? "specialty-desc extra-more": "specialty-desc"}> 
-                        {this.state.dataDetailClinic && this.state.dataDetailClinic.desMarkdown && this.state.dataDetailClinic.desHTML &&
-                            <div dangerouslySetInnerHTML={{__html: this.state.dataDetailClinic.desHTML }}></div>
+                    <div className={this.state.isMore === true ? "specialty-desc extra-more": "specialty-desc"}> 
+                        {this.state.dataDetailClinic && this.state.dataDetailClinic.descMarkdown && this.state.dataDetailClinic.descHTML &&
+                            <div dangerouslySetInnerHTML={{__html: this.state.dataDetailClinic.descHTML }}></div>
                         }
-                    </div> */}
+                    </div>
                 </div>
                 <Footer/>
             </React.Fragment>

@@ -6,10 +6,35 @@ import './Facility.scss'
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
-
+import {getAllClinicService} from '../../../services/userService'
+import { withRouter } from 'react-router-dom';
 
 class Facility extends Component {
+
+    constructor(props){
+        super(props)
+        this.state = {
+            dataClinic: []
+        }
+    }
+
+    async componentDidMount() {
+        let res = await getAllClinicService()
+        if(res && res.errCode === 0){
+            this.setState({
+                dataClinic: res.data ? res.data : []
+            })
+        }
+    }
+
+    handleViewDetailClinic = (clinic) => {
+        // console.log(clinic.id)
+        // alert("63272")
+        //Chuyen huong vao trang deatil-doctor ( nho import thu vien withRoute va boc het component)
+        if(this.props.history){
+            this.props.history.push(`/detail-clinic/${clinic.id}`)
+        }
+    }
 
     render() {
         let settings = {
@@ -29,42 +54,20 @@ class Facility extends Component {
                         </div>
                         <div className='facility-body'>
                             <Slider {...settings}>
-                                <div className='img-customize'>
-                                    <div className='facility-body'>
-                                        <div className='facility-thumb'/>
-                                        <h3 className='sub-title-facility'>Cơ sở 1</h3>
-                                    </div>
-                                </div>
-                                <div className='img-customize'>
-                                    <div className='facility-body'>
-                                        <div className='facility-thumb'/>
-                                        <h3 className='sub-title-facility'>Cơ sở 2</h3>
-                                    </div>
-                                </div>
-                                <div className='img-customize'>
-                                    <div className='facility-body'>
-                                        <div className='facility-thumb'/>
-                                        <h3 className='sub-title-facility'>Cơ sở 3</h3>
-                                    </div>
-                                </div>
-                                <div className='img-customize'>
-                                    <div className='facility-body'>
-                                        <div className='facility-thumb'/>
-                                        <h3 className='sub-title-facility'>Cơ sở 4</h3>
-                                    </div>
-                                </div>
-                                <div className='img-customize'>
-                                    <div className='facility-body'>
-                                        <div className='facility-thumb'/>
-                                        <h3 className='sub-title-facility'>Cơ sở 5</h3>
-                                    </div>
-                                </div>
-                                <div className='img-customize'>
-                                    <div className='facility-body'>
-                                        <div className='facility-thumb'/>
-                                        <h3 className='sub-title-facility'>Cơ sở 6</h3>
-                                    </div>
-                                </div>
+                            {this.state.dataClinic && this.state.dataClinic.length > 0 &&
+                                    this.state.dataClinic.map(item => {
+                                        return (
+                                            <div className='img-customize-demo' key={item.index} >
+                                                <div className='facility-body' onClick={() => this.handleViewDetailClinic(item)}>
+                                                    <div 
+                                                        className='facility-thumb'
+                                                        style={{backgroundImage: `url(${item.image})`}}
+                                                    />
+                                                    <h3 className='sub-title-facility'>{item.name}</h3>
+                                                </div>
+                                            </div>
+                                        )
+                                    })}
                             </Slider>
                         </div>
                     </div>
@@ -88,4 +91,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Facility);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Facility));
