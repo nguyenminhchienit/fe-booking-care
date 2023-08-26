@@ -66,8 +66,13 @@ export const doctorMenu = [
     { //Quản lý người dùng
         name: 'menu.system.admin.user-manage', 
         menus: [
+            //Quan lich lich kham benh
             {
                 name: 'menu.system.doctor.manage-schedule', link: '/doctor/manage-schedule',
+            },
+            //Quan ly benh nhan dat lich
+            {
+                name: 'menu.system.doctor.manage-patient', link: '/doctor/manage-patient',
             }
         ]          
 
