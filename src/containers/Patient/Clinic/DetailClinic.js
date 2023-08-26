@@ -11,7 +11,7 @@ class DetailClinic extends Component {
     constructor(props){
         super(props)
         this.state = {
-            arrDoctorId: '',
+            // arrDoctorId: '',
             dataDetailClinic: "",
         }
     }
@@ -25,7 +25,7 @@ class DetailClinic extends Component {
            
             if(res && res.errCode === 0 ){
                 this.setState({
-                    arrDoctorId: res.data.doctorSpecialty,
+                    // arrDoctorId: res.data.doctorSpecialty,
                     dataDetailClinic: res.data,
                 })
             }
@@ -39,8 +39,24 @@ class DetailClinic extends Component {
         return (
             <React.Fragment>
                 <Header/>
-                <div className='specialty-detail-container'>
-                    <div className={this.state.isMore === true ? "specialty-desc extra-more": "specialty-desc"}> 
+                <div className='clinic-detail-container'>
+                    <div className='clinic-heading'>
+                        <div className='clinic-avatar' style={{backgroundImage: `url(${this.state.dataDetailClinic.image})`}}>
+                            
+                        </div>
+                        <div className='clinic-info'>
+                            <div className='clinic-name'>
+                                {this.state.dataDetailClinic.name}
+                            </div>
+                            <div className='address-clinic'>
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span className='address-clinic-item'>
+                                    {this.state.dataDetailClinic.address}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className='clinic-desc'> 
                         {this.state.dataDetailClinic && this.state.dataDetailClinic.descMarkdown && this.state.dataDetailClinic.descHTML &&
                             <div dangerouslySetInnerHTML={{__html: this.state.dataDetailClinic.descHTML }}></div>
                         }

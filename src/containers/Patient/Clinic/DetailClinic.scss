@@ -1,0 +1,44 @@
+.clinic-detail-container{
+    margin-top: 80px;
+    padding: 0 60px;
+    background-color: #f8f8f8;
+    .clinic-heading{
+        margin-bottom: 20px;
+        margin-right: 20px;
+        padding-top: 20px;
+        display: flex;
+        align-items: center;
+        .clinic-avatar{
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: contain;
+            object-fit: cover;
+            box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+            margin-bottom: 20px;
+            margin-right: 20px;
+        }
+
+        .clinic-info{
+            .clinic-name{
+                font-size: 24px;
+                color: #45c3d2;
+                font-weight: 600;
+            }
+
+            .address-clinic{
+                font-size: 16px;
+                font-weight: 600;
+                .address-clinic-item{
+                    margin-left: 6px;
+                }
+            }
+        }
+    }
+
+    .clinic-desc{
+        padding-bottom: 20px;
+    }
+}
