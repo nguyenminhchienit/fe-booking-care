@@ -4,6 +4,9 @@ import './DetailClinic.scss'
 import Header from '../../HomePage/Header';
 import Footer from '../../HomePage/Section/Footer'
 import {getClinicDoctorById} from '../../../services/userService'
+import DoctorSchedule from '../Doctor/DoctorSchedule';
+import DoctorExtraInfo from '../Doctor/DoctorExtraInfo';
+import ProfileDoctor from '../Doctor/ProfileDoctor';
 
 
 class DetailClinic extends Component {
@@ -11,7 +14,7 @@ class DetailClinic extends Component {
     constructor(props){
         super(props)
         this.state = {
-            // arrDoctorId: '',
+            arrDoctorId: '',
             dataDetailClinic: "",
         }
     }
@@ -25,7 +28,7 @@ class DetailClinic extends Component {
            
             if(res && res.errCode === 0 ){
                 this.setState({
-                    // arrDoctorId: res.data.doctorSpecialty,
+                    arrDoctorId: res.data.doctorClinic,
                     dataDetailClinic: res.data,
                 })
             }
@@ -56,6 +59,32 @@ class DetailClinic extends Component {
                             </div>
                         </div>
                     </div>
+                    {this.state.arrDoctorId && this.state.arrDoctorId.length > 0 &&
+                    this.state.arrDoctorId.map((item,index) => {
+                        return (
+                            <div className='each-doctor' key={index}>
+                                <div className='content-left-item'>
+                                    <ProfileDoctor 
+                                        doctorId={item.doctorId}
+                                        isMoreInfo={true}
+                                    />
+                                    
+                                </div>
+                                <div className='content-right-item'>
+                                    <div className='doctor-schedule'>
+                                        <DoctorSchedule
+                                            doctorIdFromParent = {item.doctorId}
+                                        />
+                                    </div>
+                                    <div className='doctor-extra-info'>
+                                        <DoctorExtraInfo
+                                            doctorIdFromParent = {item.doctorId}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        )
+                    })}
                     <div className='clinic-desc'> 
                         {this.state.dataDetailClinic && this.state.dataDetailClinic.descMarkdown && this.state.dataDetailClinic.descHTML &&
                             <div dangerouslySetInnerHTML={{__html: this.state.dataDetailClinic.descHTML }}></div>

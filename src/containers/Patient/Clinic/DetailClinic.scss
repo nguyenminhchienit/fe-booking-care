@@ -38,6 +38,37 @@
         }
     }
 
+    .each-doctor{
+        width: 100%;
+        min-height: 300px;
+        display: flex;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        margin: 20px auto;
+        width: 1140px;
+        .content-left-item{
+            width: 60%;
+            display: flex;
+            align-items: center;
+            border-right: 1px solid #45c3d2;
+        }
+
+        .content-right-item{
+            width: 40%;
+            padding: 10px;
+        
+            .doctor-extra-info{
+                border-top: 1px solid #45c3d2;
+                margin-top: 10px;
+                padding-top: 10px;
+                .doctor-extra-container{
+                    margin-left: 0 !important;
+                }
+            }
+        }
+    }
+
     .clinic-desc{
         padding-bottom: 20px;
     }
