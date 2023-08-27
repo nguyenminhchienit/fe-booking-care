@@ -16,10 +16,14 @@
                 display: inline-block; 
                 margin-left: 10px; 
                 text-decoration: none;
+
+                .confirm{
+                    margin-left: 6px;
+                }
             }
 
-            .delete-patient{
-                background-color: red; 
+            .send-patient{
+                background-color: #FFC312; 
                 border: none; 
                 padding: 10px 20px; 
                 border-radius: 3px; 
@@ -27,6 +31,10 @@
                 display: inline-block; 
                 margin-left: 10px; 
                 text-decoration: none;
+
+                .send{
+                    margin-left: 6px;
+                }
             }
         }
               

@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import './ManagePatient.scss'
 
-import * as actions from '../../../store/actions'
 import { LANGUAGES } from '../../../utils';
 import DatePicker from '../../../components/Input/DatePicker';
-import { toast } from 'react-toastify';
 import {getListPatientForDoctorService} from '../../../services/userService'
 import moment from 'moment';
 
@@ -110,11 +108,13 @@ class ManagePatient extends Component {
                                             <td>{item.patientData.email}</td>
                                             <td>{lang === LANGUAGES.VI ? item.patientData.genderData.valueVI : item.patientData.genderData.valueEN}</td>
                                             <td>
-                                                <button className='confirm-patient' >
+                                                <button className='confirm-patient' >                                                 
                                                     <i class="fas fa-check"></i>
+                                                    <span className='confirm'>Xác nhận</span>
                                                 </button>
-                                                <button className='delete-patient'>
-                                                    <i className="fas fa-trash"></i>
+                                                <button className='send-patient'>
+                                                    <i class="fas fa-paper-plane"></i>
+                                                    <span className='send'>Gửi hóa đơn</span>
                                                 </button>
                                             </td>
                                         </tr>
