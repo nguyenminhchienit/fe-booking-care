@@ -6,6 +6,28 @@
             border-collapse: collapse;
             width: 100%;
             margin-top: 20px;
+
+            .confirm-patient{
+                background-color: #03a73e; 
+                border: none; 
+                padding: 10px 20px; 
+                border-radius: 3px; 
+                color: white; 
+                display: inline-block; 
+                margin-left: 10px; 
+                text-decoration: none;
+            }
+
+            .delete-patient{
+                background-color: red; 
+                border: none; 
+                padding: 10px 20px; 
+                border-radius: 3px; 
+                color: white; 
+                display: inline-block; 
+                margin-left: 10px; 
+                text-decoration: none;
+            }
         }
               
         #table-manage-patient td, #table-manage-patient th {

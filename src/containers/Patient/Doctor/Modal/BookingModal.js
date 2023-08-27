@@ -108,14 +108,15 @@ class BookingModal extends Component {
 
     handleSubmitModal = async () => {
         // console.log("Check state submit booking modal: ",this.state)
-        let date = new Date(this.state.birthday).getTime();
+        let birthday = new Date(this.state.birthday).getTime();
         let timeString = this.buildTimeBooking(this.props.dateTime)
         let doctorName = this.buildDoctorName(this.props.dateTime)
         let res = await postPatientAppointmentService({
             fullName: this.state.fullName,
             phoneNumber: this.state.phoneNumber,
             address: this.state.address,
-            date: date,
+            date: this.props.dateTime.date,
+            birthday: birthday,
             email: this.state.email,
             reason: this.state.reason,
             selectedGender: this.state.selectedGender.value,

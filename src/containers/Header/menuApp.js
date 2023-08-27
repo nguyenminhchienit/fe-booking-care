@@ -2,13 +2,13 @@ export const adminMenu = [
     { //Quản lý người dùng
         name: 'menu.system.admin.user-manage', 
         menus: [
-            {
-                name: 'menu.system.admin.crud', link: '/system/user-manage',
-                // subMenus: [
-                //     { name: 'menu.system.system-administrator.user-manage', link: '/system/user-manage' },
-                //     { name: 'menu.system.system-administrator.userRedux', link: '/system/user-redux' },
-                // ]
-            },
+            // {
+            //     name: 'menu.system.admin.crud', link: '/system/user-manage',
+            //     // subMenus: [
+            //     //     { name: 'menu.system.system-administrator.user-manage', link: '/system/user-manage' },
+            //     //     { name: 'menu.system.system-administrator.userRedux', link: '/system/user-redux' },
+            //     // ]
+            // },
             {
                 name: 'menu.system.admin.crud-redux', link: '/system/user-redux',
             },
@@ -64,7 +64,7 @@ export const adminMenu = [
 
 export const doctorMenu = [
     { //Quản lý người dùng
-        name: 'menu.system.admin.user-manage', 
+        name: 'menu.system.doctor.user-manage', 
         menus: [
             //Quan lich lich kham benh
             {

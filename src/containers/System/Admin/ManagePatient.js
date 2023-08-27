@@ -6,8 +6,8 @@ import * as actions from '../../../store/actions'
 import { LANGUAGES } from '../../../utils';
 import DatePicker from '../../../components/Input/DatePicker';
 import { toast } from 'react-toastify';
-
-
+import {getListPatientForDoctorService} from '../../../services/userService'
+import moment from 'moment';
 
 
 class ManagePatient extends Component {
@@ -15,12 +15,22 @@ class ManagePatient extends Component {
     constructor(props){
         super(props)
         this.state = {
-            currentDate: ''
+            currentDate: moment(new Date()).startOf('day').valueOf(),
+            dataPatient: []
         }
     }
 
     async componentDidMount() {
-       
+        let res = await getListPatientForDoctorService({
+            date: new Date(this.state.currentDate).getTime(),
+            doctorId: this.props.user.id
+        })
+        if(res && res.errCode === 0){
+            console.log("Check res patient: ",res)
+            this.setState({
+                dataPatient: res.data
+            })
+        }
     }
 
     componentDidUpdate(prevProps,prevState,snapshot) {
@@ -35,7 +45,16 @@ class ManagePatient extends Component {
         // console.log("check select: ",options)
     };
 
-    onChangePickerDate = (date) => {
+    onChangePickerDate = async (date) => {
+        let res = await getListPatientForDoctorService({
+            date: new Date(date[0]).getTime(),
+            doctorId: this.props.user.id
+        })
+        if(res && res.errCode === 0){
+            this.setState({
+                dataPatient: res.data
+            })
+        }
         this.setState({
             currentDate : date[0]
         })
@@ -49,7 +68,9 @@ class ManagePatient extends Component {
     }
 
     render() {
-        // console.log("Check date: ",this.state.rangeScheduleTime)
+        // console.log("Check date: ",this.props)
+        let {dataPatient} = this.state
+        let {lang} = this.props
         return (
             <React.Fragment>
                 <div className="manage-patient-container">
@@ -68,31 +89,38 @@ class ManagePatient extends Component {
                         </div>
                         <div className='col-12'>
                         <table id="table-manage-patient">
-                            <tr>
-                                <th>Company</th>
-                                <th>Contact</th>
-                                <th>Country</th>
-                            </tr>
-                            <tr>
-                                <td>Alfreds Futterkiste</td>
-                                <td>Maria Anders</td>
-                                <td>Germany</td>
-                            </tr>
-                            <tr>
-                                <td>Berglunds snabbköp</td>
-                                <td>Christina Berglund</td>
-                                <td>Sweden</td>
-                            </tr>
-                            <tr>
-                                <td>Centro comercial Moctezuma</td>
-                                <td>Francisco Chang</td>
-                                <td>Mexico</td>
-                            </tr>
-                            <tr>
-                                <td>Ernst Handel</td>
-                                <td>Roland Mendel</td>
-                                <td>Austria</td>
-                            </tr>
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Thời gian</th>
+                                    <th>Tên</th>
+                                    <th>Email</th>
+                                    <th>Giới tính</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {dataPatient && dataPatient.length > 0 &&
+                                dataPatient.map((item,index) => {
+                                    return (
+                                        <tr>
+                                            <td>{index+1}</td>
+                                            <td>{lang === LANGUAGES.VI === true ? item.timeData.valueVI : item.timeData.valueEN}</td>
+                                            <td>{item.patientData.firstName}</td>
+                                            <td>{item.patientData.email}</td>
+                                            <td>{lang === LANGUAGES.VI ? item.patientData.genderData.valueVI : item.patientData.genderData.valueEN}</td>
+                                            <td>
+                                                <button className='confirm-patient' >
+                                                    <i class="fas fa-check"></i>
+                                                </button>
+                                                <button className='delete-patient'>
+                                                    <i className="fas fa-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    )
+                                })}
+                            </tbody>
                             </table>
 
                         </div>
@@ -107,6 +135,7 @@ const mapStateToProps = state => {
     return {
         lang: state.app.language,
         isLoggedIn: state.user.isLoggedIn,
+        user: state.user.userInfo
     };
 };
 

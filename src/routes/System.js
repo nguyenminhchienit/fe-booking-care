@@ -7,14 +7,16 @@ import Header from '../containers/Header/Header';
 import ManageDoctor from '../containers/System/Admin/ManageDoctor';
 import ManageSpecialty from '../containers/System/Specialty/ManageSpecialty';
 import ManageClinic from '../containers/System/Clinic/ManageClinic';
+import HomeAdmin from './HomeAdmin'
 class System extends Component {
     render() {
         const { systemMenuPath, isLoggedIn } = this.props;
         return (
             <div className="system-container">
-                {this.props.isLoggedIn && <Header />}
+                {isLoggedIn && <Header />}
                 <div className="system-list">
                     <Switch>
+                        <Route path="/system/admin" component={HomeAdmin} />
                         <Route path="/system/user-manage" component={UserManage} />
                         <Route path="/system/user-redux" component={UserRedux} /> 
                         <Route path="/system/user-doctor" component={ManageDoctor} />

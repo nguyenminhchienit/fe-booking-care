@@ -91,6 +91,11 @@ let getAllClinicService = () => {
 let getClinicDoctorById = (data) => {
     return axios.get(`/api/get-clinic-doctor-by-id?id=${data.id}`)
 }
+
+let getListPatientForDoctorService = (data) => {
+    return axios.get(`/api/get-list-patient-for-doctor?doctorId=${data.doctorId}&date=${data.date}`)
+}
+
 export {
     handleLogin, 
     getAllUsers,
@@ -113,5 +118,6 @@ export {
     getSpecialtyDoctorById,
     postCreateNewClinicService,
     getAllClinicService,
-    getClinicDoctorById
+    getClinicDoctorById,
+    getListPatientForDoctorService
 }

@@ -195,7 +195,7 @@ class UserRedux extends Component {
         let {email,password,firstName,lastName,address,phoneNumber,role,position,gender} = this.state;
         return (
             <div className="user-redux-container" >
-                <div className="title">Manage user redux</div>
+                <div className="title">Quản lý người dùng</div>
                 <div className="user-redux-body">
                     <div className='container' style={{marginTop: '20px'}}>
                         <div className='row'>
