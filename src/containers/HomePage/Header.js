@@ -3,7 +3,6 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import './Header.scss'
 import {LANGUAGES} from "../../utils"
-import ReactDOM from 'react-dom';
 import { changeLanguageApp } from '../../store/actions/appActions';
 import { withRouter } from 'react-router-dom';
 import {handleSearch} from '../../services/userService'
