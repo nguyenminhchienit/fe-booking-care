@@ -8,6 +8,7 @@ import {getListPatientForDoctorService, postSendRemedyService} from '../../../se
 import moment from 'moment';
 import RemedyModal from '../../Patient/Doctor/Modal/RemedyModal';
 import { toast } from 'react-toastify';
+import LoadingOverlay from 'react-loading-overlay';
 
 
 class ManagePatient extends Component {
@@ -18,7 +19,8 @@ class ManagePatient extends Component {
             currentDate: moment(new Date()).startOf('day').valueOf(),
             dataPatient: [],
             isOpenModal: false,
-            dataModal: {}
+            dataModal: {},
+            isLoading: false
         }
     }
 
@@ -85,6 +87,9 @@ class ManagePatient extends Component {
 
     sendRemedy = async (dataFromModal) => {
         // console.log("Check send remedy: ",dataFromModal.email)
+        this.setState({
+            isLoading: true
+        })
         let res = await postSendRemedyService({
             email: dataFromModal.email,
             doctorId: this.state.dataModal.doctorId,
@@ -93,6 +98,10 @@ class ManagePatient extends Component {
             language: this.props.lang,
             patientName: this.state.dataModal.patientData.firstName,
             imgBase64: dataFromModal.imgBase64
+        })
+
+        this.setState({
+            isLoading: false
         })
 
         if(res && res.errCode === 0){
@@ -117,65 +126,71 @@ class ManagePatient extends Component {
         console.log("Check data patient: ", dataPatient)
         let {lang} = this.props
         return (
-            <React.Fragment>
-                <div className="manage-patient-container">
-                    <div className='title mb-3'>
-                        ManageDoctor Patient
-                    </div>
-                    <div className='manage-patient-body row p-3'>
-                        <div className='col-6'>
-                            <label>Chọn ngày</label>
-                            <DatePicker
-                                onChange = {this.onChangePickerDate}
-                                className="form-control"
-                                value={this.state.currentDate} //currentDate[0]: phan tu thu 0 moi tra ve dung ding dang ngay
-                                minDate={this.getPreviousDay()}
-                            />
+            <LoadingOverlay
+                active={this.state.isLoading}
+                spinner
+                text='Loading...'
+            >
+                <React.Fragment>
+                    <div className="manage-patient-container">
+                        <div className='title mb-3'>
+                            ManageDoctor Patient
                         </div>
-                        <div className='col-12'>
-                        <table id="table-manage-patient">
-                            <thead>
-                                <tr>
-                                    <th>STT</th>
-                                    <th>Thời gian</th>
-                                    <th>Tên</th>
-                                    <th>Email</th>
-                                    <th>Giới tính</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {dataPatient && dataPatient.length > 0 &&
-                                dataPatient.map((item,index) => {
-                                    return (
-                                        <tr>
-                                            <td>{index+1}</td>
-                                            <td>{lang === LANGUAGES.VI === true ? item.timeData.valueVI : item.timeData.valueEN}</td>
-                                            <td>{item.patientData.firstName}</td>
-                                            <td>{item.patientData.email}</td>
-                                            <td>{lang === LANGUAGES.VI ? item.patientData.genderData.valueVI : item.patientData.genderData.valueEN}</td>
-                                            <td>
-                                                <button className='confirm-patient' onClick={() => this.handleShowModal(item)}>                                                 
-                                                    <i class="fas fa-check"></i>
-                                                    <span className='confirm'>Xác nhận</span>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    )
-                                })}
-                            </tbody>
-                            </table>
+                        <div className='manage-patient-body row p-3'>
+                            <div className='col-6'>
+                                <label>Chọn ngày</label>
+                                <DatePicker
+                                    onChange = {this.onChangePickerDate}
+                                    className="form-control"
+                                    value={this.state.currentDate} //currentDate[0]: phan tu thu 0 moi tra ve dung ding dang ngay
+                                    minDate={this.getPreviousDay()}
+                                />
+                            </div>
+                            <div className='col-12'>
+                            <table id="table-manage-patient">
+                                <thead>
+                                    <tr>
+                                        <th>STT</th>
+                                        <th>Thời gian</th>
+                                        <th>Tên</th>
+                                        <th>Email</th>
+                                        <th>Giới tính</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {dataPatient && dataPatient.length > 0 &&
+                                    dataPatient.map((item,index) => {
+                                        return (
+                                            <tr>
+                                                <td>{index+1}</td>
+                                                <td>{lang === LANGUAGES.VI === true ? item.timeData.valueVI : item.timeData.valueEN}</td>
+                                                <td>{item.patientData.firstName}</td>
+                                                <td>{item.patientData.email}</td>
+                                                <td>{lang === LANGUAGES.VI ? item.patientData.genderData.valueVI : item.patientData.genderData.valueEN}</td>
+                                                <td>
+                                                    <button className='confirm-patient' onClick={() => this.handleShowModal(item)}>                                                 
+                                                        <i class="fas fa-check"></i>
+                                                        <span className='confirm'>Xác nhận</span>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        )
+                                    })}
+                                </tbody>
+                                </table>
 
+                            </div>
                         </div>
                     </div>
-                </div>
-                <RemedyModal
-                    isOpenModal = {this.state.isOpenModal}
-                    handleHideModal = {this.handleHideModal}
-                    dataModal = {this.state.dataModal}
-                    sendRemedy = {this.sendRemedy}
-                />
-            </React.Fragment>
+                    <RemedyModal
+                        isOpenModal = {this.state.isOpenModal}
+                        handleHideModal = {this.handleHideModal}
+                        dataModal = {this.state.dataModal}
+                        sendRemedy = {this.sendRemedy}
+                    />
+                </React.Fragment>
+            </LoadingOverlay>
         );
     }
 }

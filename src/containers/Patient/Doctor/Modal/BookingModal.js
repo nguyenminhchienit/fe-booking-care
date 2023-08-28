@@ -11,6 +11,7 @@ import _ from 'lodash'
 import { postPatientAppointmentService } from '../../../../services/userService';
 import { toast } from 'react-toastify';
 import moment from 'moment';
+import LoadingOverlay from 'react-loading-overlay';
 
 
 class BookingModal extends Component {
@@ -26,7 +27,9 @@ class BookingModal extends Component {
             selectedGender: '',
             genders: '',
             doctorId: '',
-            timeType: ''
+            timeType: '',
+
+            isLoading: false
         }
     }
 
@@ -108,6 +111,9 @@ class BookingModal extends Component {
 
     handleSubmitModal = async () => {
         // console.log("Check state submit booking modal: ",this.state)
+        this.setState({
+            isLoading: true
+        })
         let birthday = new Date(this.state.birthday).getTime();
         let timeString = this.buildTimeBooking(this.props.dateTime)
         let doctorName = this.buildDoctorName(this.props.dateTime)
@@ -125,6 +131,10 @@ class BookingModal extends Component {
             language: this.props.language,
             timeString: timeString,
             doctorName: doctorName
+        })
+
+        this.setState({
+            isLoading: false
         })
         if(res && res.errCode === 0){
             toast.success('Booking appointment succeed!')
@@ -162,91 +172,97 @@ class BookingModal extends Component {
         let {handleHideModal,dateTime} = this.props
         console.log("Check dateTime props: ",dateTime)
         return (
-            <React.Fragment>
-               <div className='booking-modal-container'>
-                    <Modal isOpen={this.props.isOpenModal}  className={'booking-modal-wrapper'} size='lg' centered >
-                        <div className='booking-modal-content'>
-                            <div className='booking-modal-header'>
-                                <span className='booking-modal-title'>
-                                    Thông tin đặt lịch khám bệnh
-                                </span>
-                                <i 
-                                    class="fas fa-times close-modal" 
-                                    onClick={() => handleHideModal()}
-                                ></i>
-                            </div>
-                            <div className='booking-modal-body '>
-                                <div className='intro-doctor-modal'>
-                                    <ProfileDoctor doctorId={dateTime.doctorId}/>
+            <LoadingOverlay
+                active={this.state.isLoading}
+                spinner
+                text='Loading...'
+            >
+                <React.Fragment>
+                <div className='booking-modal-container'>
+                        <Modal isOpen={this.props.isOpenModal}  className={'booking-modal-wrapper'} size='lg' centered >
+                            <div className='booking-modal-content'>
+                                <div className='booking-modal-header'>
+                                    <span className='booking-modal-title'>
+                                        Thông tin đặt lịch khám bệnh
+                                    </span>
+                                    <i 
+                                        class="fas fa-times close-modal" 
+                                        onClick={() => handleHideModal()}
+                                    ></i>
                                 </div>
-                                
-                                <div className='form-doctor row p-3'>
-                                    <div className='col-6 form-group'>
-                                        <label>Họ và tên</label>
-                                        <input 
-                                            className='form-control'
-                                            value={this.state.fullName}
-                                            onChange={(e) => this.handleChangeInput(e,'fullName')}
-                                        ></input>
+                                <div className='booking-modal-body '>
+                                    <div className='intro-doctor-modal'>
+                                        <ProfileDoctor doctorId={dateTime.doctorId}/>
                                     </div>
-                                    <div className='col-6 form-group'>
-                                        <label>Số điện thoại</label>
-                                        <input 
-                                            className='form-control'
-                                            value={this.state.phoneNumber}
-                                            onChange={(e) => this.handleChangeInput(e,'phoneNumber')}
-                                        ></input>
-                                    </div>
-                                    <div className='col-6 form-group'>
-                                        <label>Email</label>
-                                        <input 
-                                            className='form-control'
-                                            value={this.state.email}
-                                            onChange={(e) => this.handleChangeInput(e,'email')}
-                                        ></input>
-                                    </div>
-                                    <div className='col-6 form-group'>
-                                        <label>Địa chỉ liên hệ</label>
-                                        <input 
-                                            className='form-control'
-                                            value={this.state.address}
-                                            onChange={(e) => this.handleChangeInput(e,'address')}
-                                        ></input>
-                                    </div>
-                                    <div className='col-6 form-group'>
-                                        <label>Ngày sinh</label>
-                                        <DatePicker
-                                            value={this.state.birthday}
-                                            className="form-control"
-                                            onChange={this.onChangePickerDate} 
-                                        ></DatePicker>
-                                    </div>
-                                    <div className='col-6 form-group'>
-                                        <label>Giới tính</label>
-                                        <Select
-                                            value={this.state.selectedGender}
-                                            onChange={this.handleChangeSelect}
-                                            options={this.state.genders}
-                                        ></Select>
-                                    </div>
-                                    <div className='col-12 form-group'>
-                                        <label>Lý do khám</label>
-                                        <input 
-                                            className='form-control'
-                                            value={this.state.reason}
-                                            onChange={(e) => this.handleChangeInput(e,'reason')}
-                                        ></input>
+                                    
+                                    <div className='form-doctor row p-3'>
+                                        <div className='col-6 form-group'>
+                                            <label>Họ và tên</label>
+                                            <input 
+                                                className='form-control'
+                                                value={this.state.fullName}
+                                                onChange={(e) => this.handleChangeInput(e,'fullName')}
+                                            ></input>
+                                        </div>
+                                        <div className='col-6 form-group'>
+                                            <label>Số điện thoại</label>
+                                            <input 
+                                                className='form-control'
+                                                value={this.state.phoneNumber}
+                                                onChange={(e) => this.handleChangeInput(e,'phoneNumber')}
+                                            ></input>
+                                        </div>
+                                        <div className='col-6 form-group'>
+                                            <label>Email</label>
+                                            <input 
+                                                className='form-control'
+                                                value={this.state.email}
+                                                onChange={(e) => this.handleChangeInput(e,'email')}
+                                            ></input>
+                                        </div>
+                                        <div className='col-6 form-group'>
+                                            <label>Địa chỉ liên hệ</label>
+                                            <input 
+                                                className='form-control'
+                                                value={this.state.address}
+                                                onChange={(e) => this.handleChangeInput(e,'address')}
+                                            ></input>
+                                        </div>
+                                        <div className='col-6 form-group'>
+                                            <label>Ngày sinh</label>
+                                            <DatePicker
+                                                value={this.state.birthday}
+                                                className="form-control"
+                                                onChange={this.onChangePickerDate} 
+                                            ></DatePicker>
+                                        </div>
+                                        <div className='col-6 form-group'>
+                                            <label>Giới tính</label>
+                                            <Select
+                                                value={this.state.selectedGender}
+                                                onChange={this.handleChangeSelect}
+                                                options={this.state.genders}
+                                            ></Select>
+                                        </div>
+                                        <div className='col-12 form-group'>
+                                            <label>Lý do khám</label>
+                                            <input 
+                                                className='form-control'
+                                                value={this.state.reason}
+                                                onChange={(e) => this.handleChangeInput(e,'reason')}
+                                            ></input>
+                                        </div>
                                     </div>
                                 </div>
+                                <div className='booking-modal-footer'>
+                                    <button className='btn-submit btn' onClick={() => this.handleSubmitModal()}>Xác nhận</button>
+                                    <button className='btn-close btn' onClick={() => handleHideModal()}>Hủy</button>
+                                </div>
                             </div>
-                            <div className='booking-modal-footer'>
-                                <button className='btn-submit btn' onClick={() => this.handleSubmitModal()}>Xác nhận</button>
-                                <button className='btn-close btn' onClick={() => handleHideModal()}>Hủy</button>
-                            </div>
-                        </div>
-                    </Modal>
-               </div>
-            </React.Fragment>
+                        </Modal>
+                </div>
+                </React.Fragment>
+            </LoadingOverlay>
         );
     }
 }
