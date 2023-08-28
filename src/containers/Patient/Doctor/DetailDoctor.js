@@ -6,6 +6,8 @@ import {getDoctorInfoDetailService} from '../../../services/userService'
 import { LANGUAGES } from '../../../utils';
 import DoctorSchedule from './DoctorSchedule';
 import DoctorExtraInfo from './DoctorExtraInfo';
+import Comment from '../../../components/SocialPlugin/Comment';
+import LikeAndShare from '../../../components/SocialPlugin/LikeAndShare';
 
 class DetailDoctor extends Component {
     constructor(props){
@@ -53,6 +55,7 @@ class DetailDoctor extends Component {
                             {this.state.detailDoctor && this.state.detailDoctor.Markdown && this.state.detailDoctor.Markdown.description
                                 && <p className='doctor-desc'>{this.state.detailDoctor.Markdown.description}</p>
                             }
+                            <LikeAndShare/>
                         </div>
                     </div>
                     <div className='doctor-schedule'>
@@ -75,9 +78,11 @@ class DetailDoctor extends Component {
                         }
                     </div>
                     <div className='doctor-review'>
-
+                        <Comment/>
                     </div>
+                    
                 </div>
+                
             </React.Fragment>
         );
     }
