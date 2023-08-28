@@ -5,6 +5,7 @@ import './ManageHandbook.scss'
 import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
 import { toast } from 'react-toastify';
+import {postCreateNewHandbookService} from '../../../services/userService'
 
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 
@@ -51,7 +52,18 @@ class ManageHandbook extends Component {
     }
 
     handleClickSubmitHandbook = async () => {
-        console.log("Check state when submit specialty: ",this.state)
+        let res = await postCreateNewHandbookService(this.state)
+        if(res && res.errCode === 0){
+            toast.success("Save handbook succeed!")
+            this.setState({
+                topicHandbook: '',
+                imageBase64: '',
+                desHTML: '',
+                desMarkdown: '',
+            })
+        }else{
+            toast.error("Save handbook failed!")
+        }
     }
 
     render() {

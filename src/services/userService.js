@@ -104,6 +104,10 @@ let handleSearch = (name) => {
     return axios.get(`api/search-specialty?name=${name}`)
 }
 
+let postCreateNewHandbookService = (data) => {
+    return axios.post("/api/create-new-handbook", data)
+}
+
 export {
     handleLogin, 
     getAllUsers,
@@ -129,5 +133,6 @@ export {
     getClinicDoctorById,
     getListPatientForDoctorService,
     postSendRemedyService,
-    handleSearch
+    handleSearch,
+    postCreateNewHandbookService
 }
