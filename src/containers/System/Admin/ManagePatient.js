@@ -4,8 +4,10 @@ import './ManagePatient.scss'
 
 import { LANGUAGES } from '../../../utils';
 import DatePicker from '../../../components/Input/DatePicker';
-import {getListPatientForDoctorService} from '../../../services/userService'
+import {getListPatientForDoctorService, postSendRemedyService} from '../../../services/userService'
 import moment from 'moment';
+import RemedyModal from '../../Patient/Doctor/Modal/RemedyModal';
+import { toast } from 'react-toastify';
 
 
 class ManagePatient extends Component {
@@ -14,7 +16,9 @@ class ManagePatient extends Component {
         super(props)
         this.state = {
             currentDate: moment(new Date()).startOf('day').valueOf(),
-            dataPatient: []
+            dataPatient: [],
+            isOpenModal: false,
+            dataModal: {}
         }
     }
 
@@ -65,9 +69,52 @@ class ManagePatient extends Component {
         return previous;
     }
 
+    handleHideModal = () => {
+        this.setState({
+            isOpenModal: false
+        })
+    }
+
+    handleShowModal = (patient) => {
+        console.log("Check mail: ",patient)
+        this.setState({
+            isOpenModal: true,
+            dataModal: patient
+        })
+    }
+
+    sendRemedy = async (dataFromModal) => {
+        // console.log("Check send remedy: ",dataFromModal.email)
+        let res = await postSendRemedyService({
+            email: dataFromModal.email,
+            doctorId: this.state.dataModal.doctorId,
+            patientId: this.state.dataModal.patientId,
+            timeType: this.state.dataModal.timeType,
+            language: this.props.lang,
+            patientName: this.state.dataModal.patientData.firstName,
+            imgBase64: dataFromModal.imgBase64
+        })
+
+        if(res && res.errCode === 0){
+            toast.success('Xác nhận bệnh nhân thành công')
+            let res = await getListPatientForDoctorService({
+                date: new Date(this.state.currentDate).getTime(),
+                doctorId: this.props.user.id
+            })
+            if(res && res.errCode === 0){
+                this.setState({
+                    dataPatient: res.data
+                })
+            }
+            this.handleHideModal();
+        }else{
+            toast.error("Xác nhận thất bại")
+        }
+    }
+
     render() {
-        // console.log("Check date: ",this.props)
         let {dataPatient} = this.state
+        console.log("Check data patient: ", dataPatient)
         let {lang} = this.props
         return (
             <React.Fragment>
@@ -108,13 +155,9 @@ class ManagePatient extends Component {
                                             <td>{item.patientData.email}</td>
                                             <td>{lang === LANGUAGES.VI ? item.patientData.genderData.valueVI : item.patientData.genderData.valueEN}</td>
                                             <td>
-                                                <button className='confirm-patient' >                                                 
+                                                <button className='confirm-patient' onClick={() => this.handleShowModal(item)}>                                                 
                                                     <i class="fas fa-check"></i>
                                                     <span className='confirm'>Xác nhận</span>
-                                                </button>
-                                                <button className='send-patient'>
-                                                    <i class="fas fa-paper-plane"></i>
-                                                    <span className='send'>Gửi hóa đơn</span>
                                                 </button>
                                             </td>
                                         </tr>
@@ -126,6 +169,12 @@ class ManagePatient extends Component {
                         </div>
                     </div>
                 </div>
+                <RemedyModal
+                    isOpenModal = {this.state.isOpenModal}
+                    handleHideModal = {this.handleHideModal}
+                    dataModal = {this.state.dataModal}
+                    sendRemedy = {this.sendRemedy}
+                />
             </React.Fragment>
         );
     }

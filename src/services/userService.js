@@ -96,6 +96,10 @@ let getListPatientForDoctorService = (data) => {
     return axios.get(`/api/get-list-patient-for-doctor?doctorId=${data.doctorId}&date=${data.date}`)
 }
 
+let postSendRemedyService = (data) => {
+    return axios.post("/api/post-send-remedy", data)
+}
+
 export {
     handleLogin, 
     getAllUsers,
@@ -119,5 +123,6 @@ export {
     postCreateNewClinicService,
     getAllClinicService,
     getClinicDoctorById,
-    getListPatientForDoctorService
+    getListPatientForDoctorService,
+    postSendRemedyService
 }
