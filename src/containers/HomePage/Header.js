@@ -3,14 +3,73 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import './Header.scss'
 import {LANGUAGES} from "../../utils"
-
+import ReactDOM from 'react-dom';
 import { changeLanguageApp } from '../../store/actions/appActions';
 import { withRouter } from 'react-router-dom';
+import {handleSearch} from '../../services/userService'
 
 class Header extends Component {
 
+    constructor(props){
+        super(props)
+        this.state = {
+           search: '',
+           dataSearch: [],
+           isShowSearch: false
+        }
+        this.wrapperRef = React.createRef()
+    }
+
     changeLanguage = (language) => {
         this.props.changeLanguageAppRedux(language)
+    }
+
+    async componentDidMount(){
+        let res  = await handleSearch('')
+        if(res && res.errCode === 0){
+            this.setState({
+                dataSearch: res.data
+            })
+        }
+    }
+
+    handleChangSearch = async (e) => {
+        this.setState({
+            search: e.target.value
+        })
+        
+        let res  = await handleSearch(e.target.value)
+        console.log("check res header: ",res)
+        if(res && res.errCode === 0){
+            this.setState({
+                dataSearch: res.data
+            })
+        }
+
+    }
+
+    showSearch = (e) =>{
+        console.log("Check e", e.target)
+        this.setState({
+            isShowSearch: true
+        })
+    }
+
+    CloseSearch = (e) => {
+        if (this.wrapperRef && this.wrapperRef.current.contains(e.target)) {
+            console.log("Check show hide if")
+            this.setState({
+                isShowSearch: false
+            })
+        }
+    }
+
+    handleViewDetailSpecialty = (specialty) => {
+        // console.log(specialty.id)
+        //Chuyen huong vao trang deatil-doctor ( nho import thu vien withRoute va boc het component)
+        if(this.props.history){
+            this.props.history.push(`/detail-specialty/${specialty.id}`)
+        }
     }
 
     returnHome = () => {
@@ -20,7 +79,7 @@ class Header extends Component {
     }
 
     render() {
-        console.log("Check props: ",this.props)
+        console.log("Check state header: ",this.state)
         return (
             <React.Fragment>
                 <div className='header-home-container'>
@@ -67,8 +126,37 @@ class Header extends Component {
                                 <div className='sub-title'><FormattedMessage id="headerhome.care"/></div>
                                 <div className='main-search'>
                                     <i className="fas fa-search icon-search-header"></i>
-                                    <input type='text' placeholder='Tìm kiếm' className='input-search-header'/>
+                                    <input 
+                                        type='text' 
+                                        placeholder='Tìm kiếm theo chuyên khoa' 
+                                        className='input-search-header'
+                                        value={this.state.search}
+                                        onChange={(e) => this.handleChangSearch(e)}
+                                        onClick={(e) => this.showSearch(e)}
+                                    />
+                                    {this.state.isShowSearch && this.state.isShowSearch === true &&
+                                        <div className='when-search' ref={this.wrapperRef} onClick={(e) => this.CloseSearch(e)}>
+                                            <ul className='list-search'>
+                                                {this.state.dataSearch && this.state.dataSearch.length > 0 ?
+                                                this.state.dataSearch.map((item,index) => {
+                                                    return (
+                                                        <li 
+                                                            className='item-search' 
+                                                            key={index}
+                                                            onClick={() => this.handleViewDetailSpecialty(item)}
+                                                        >
+                                                            {item.name}
+                                                         </li>
+                                                    )
+                                                }) : <li className='item-search' style={{textAlign: 'center'}}>
+                                                        Trống
+                                                    </li>
+                                                }
+                                            </ul>
+                                        </div>
+                                    }
                                 </div>
+                                
                             </div>
                             <div className='banner-down'>
                                 <div className='option-banner'>

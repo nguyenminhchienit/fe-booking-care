@@ -100,6 +100,10 @@ let postSendRemedyService = (data) => {
     return axios.post("/api/post-send-remedy", data)
 }
 
+let handleSearch = (name) => {
+    return axios.get(`api/search-specialty?name=${name}`)
+}
+
 export {
     handleLogin, 
     getAllUsers,
@@ -124,5 +128,6 @@ export {
     getAllClinicService,
     getClinicDoctorById,
     getListPatientForDoctorService,
-    postSendRemedyService
+    postSendRemedyService,
+    handleSearch
 }
