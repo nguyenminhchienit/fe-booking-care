@@ -43,10 +43,11 @@
         margin: 0 auto;
         .handbook-body-info{
             display: flex;
+            cursor: pointer;
         }
         .handbook-thumb{
             height: 180px;
-            width: 280px;
+            width: 350px;
             background-image: url('../../../assets/speciality/handbook.jpg');
             background-position: center center;
             background-repeat: no-repeat;

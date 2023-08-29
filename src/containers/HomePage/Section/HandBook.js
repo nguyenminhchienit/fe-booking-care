@@ -7,9 +7,34 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-
+import {getAllHandbookService} from '../../../services/userService.js'
+import { withRouter } from 'react-router-dom';
 
 class HandBook extends Component {
+
+    constructor(props){
+        super(props)
+        this.state = {
+            dataHandbook: []
+        }
+    }
+
+    async componentDidMount() {
+        let res = await getAllHandbookService()
+        if(res && res.errCode === 0){
+            this.setState({
+                dataHandbook: res.data ? res.data : []
+            })
+        }
+    }
+
+    handleViewDetailHandbook = (handbook) => {
+        console.log(handbook.id)
+        //Chuyen huong vao trang deatil-doctor ( nho import thu vien withRoute va boc het component)
+        if(this.props.history){
+            this.props.history.push(`/detail-handbook/${handbook.id}`)
+        }
+    }
 
     render() {
         let settings = {
@@ -29,47 +54,19 @@ class HandBook extends Component {
                         </div>
                         <div className='handbook-body'>
                             <Slider {...settings}>
-                                <div className='img-customize'>
-                                    <div className='handbook-body-info'>
-                                        <div className='handbook-thumb'/>                  
-                                        <div className='handbook-title-info'>Giải đáp Y học: Tiểu đường tuýp 2 là nặng hay nhẹ?</div>
-                                    </div>
-                                </div>
-                                <div className='img-customize'>
-                                    <div className='handbook-body-info'>
-                                        <div className='handbook-thumb'/>
-                                        <div className='handbook-title-info'>Giải đáp Y học: Tiểu đường tuýp 2 là nặng hay nhẹ?</div>
-                                        
-                                    </div>
-                                </div>
-                                <div className='img-customize'>
-                                    <div className='handbook-body-info'>
-                                        <div className='handbook-thumb'/>
-                                        <div className='handbook-title-info'>Giải đáp Y học: Tiểu đường tuýp 2 là nặng hay nhẹ?</div>
-                                        
-                                    </div>
-                                </div>
-                                <div className='img-customize'>
-                                    <div className='handbook-body-info'>
-                                        <div className='handbook-thumb'/>
-                                        <div className='handbook-title-info'>Giải đáp Y học: Tiểu đường tuýp 2 là nặng hay nhẹ?</div>
-                                        
-                                    </div>
-                                </div>
-                                <div className='img-customize'>
-                                    <div className='handbook-body-info'>
-                                        <div className='handbook-thumb'/>
-                                        <div className='handbook-title-info'>Giải đáp Y học: Tiểu đường tuýp 2 là nặng hay nhẹ?</div>
-                                        
-                                    </div>
-                                </div>
-                                <div className='img-customize'>
-                                    <div className='handbook-body-info'>
-                                        <div className='handbook-thumb'/>
-                                        <div className='handbook-title-info'>Giải đáp Y học: Tiểu đường tuýp 2 là nặng hay nhẹ?</div>
-                                        
-                                    </div>
-                                </div>
+                                    {this.state.dataHandbook && this.state.dataHandbook.length > 0 &&
+                                    this.state.dataHandbook.map((item,index) => {
+                                        return (
+                                            <div className='img-customize' key={index}>
+                                                <div className='handbook-body-info' onClick={() => this.handleViewDetailHandbook(item)}>
+                                                    <div className='handbook-thumb'
+                                                        style={{backgroundImage: `url(${item.image})`}}
+                                                    />                  
+                                                    <div className='handbook-title-info'>{item.topicHandbook}</div>
+                                                </div>
+                                             </div>
+                                        )
+                                    })}
                             </Slider>
                         </div>
                     </div>
@@ -83,7 +80,6 @@ class HandBook extends Component {
 
 const mapStateToProps = state => {
     return {
-        isLoggedIn: state.user.isLoggedIn,
         lang: state.app.language
     };
 };
@@ -93,4 +89,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HandBook);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HandBook));

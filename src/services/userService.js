@@ -108,6 +108,14 @@ let postCreateNewHandbookService = (data) => {
     return axios.post("/api/create-new-handbook", data)
 }
 
+let getHandbookByIdService = (data) => {
+    return axios.get(`/api/get-handbook-by-id?id=${data.id}`)
+}
+
+let getAllHandbookService = () => {
+    return axios.get('/api/get-all-handbook')
+}
+
 export {
     handleLogin, 
     getAllUsers,
@@ -134,5 +142,7 @@ export {
     getListPatientForDoctorService,
     postSendRemedyService,
     handleSearch,
-    postCreateNewHandbookService
+    postCreateNewHandbookService,
+    getHandbookByIdService,
+    getAllHandbookService
 }
