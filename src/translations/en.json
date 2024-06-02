@@ -39,17 +39,26 @@
                 "crud": "Manage CRUD",
                 "crud-redux": "Manage Users",
                 "clinic": "Clinic",
-                "manage-clinic": "Manage clinic",
+                "manage-clinic": "Create clinic",
                 "speciality": "Speciality",
-                "manage-speciality": "Manage speciality",
+                "manage-speciality": "Create speciality",
                 "handbook": "Handbook",
-                "manage-handbook": "Manage handbook"
+                "manage-handbook": "Create handbook",
+                "list-manage-clinic": "List Clinic",
+                "list-manage-speciality": "List Speciality",
+                "list-manage-handbook": "List Handbook",
+                "dashboard": "Dashboard"
                 
             },
             "doctor": {
                 "user-manage": "Users",
                 "manage-schedule": "Manage Doctor's schedule",
                 "manage-patient": "Manage patient"
+            },
+            "patient": {
+                "booking-doctor": "Manage scheduled examinations",
+                "manage-schedule": "Manage scheduled examinations"
+            
             }
 
            

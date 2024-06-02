@@ -66,6 +66,10 @@ let getProfileDoctorByIdService = (doctorId) => {
   return axios.get(`/api/get-profile-doctor-by-id?doctorId=${doctorId}`);
 };
 
+let getBookingWithDayService = (dayBooking) => {
+  return axios.get(`/api/get-booking-with-day?dayBooking=${dayBooking}`);
+};
+
 let postPatientAppointmentService = (data) => {
   return axios.post("/api/post-book-appointment", data);
 };
@@ -96,8 +100,20 @@ let getAllClinicService = () => {
   return axios.get("/api/get-all-clinic");
 };
 
+let updateClinicService = (data) => {
+  return axios.put("/api/update-clinic", data);
+};
+
 let getClinicDoctorById = (data) => {
   return axios.get(`/api/get-clinic-doctor-by-id?id=${data.id}`);
+};
+
+let deleteClinicService = (clinicId) => {
+  return axios.delete("/api/delete-clinic", {
+    data: {
+      id: clinicId,
+    },
+  });
 };
 
 let getListPatientForDoctorService = (data) => {
@@ -114,6 +130,10 @@ let getListPatientForDoctorDoneService = (data) => {
 
 let postSendRemedyService = (data) => {
   return axios.post("/api/post-send-remedy", data);
+};
+
+let postSendCancelBookingService = (data) => {
+  return axios.put("/api/get-booking-cancel", data);
 };
 
 let postSendRemedyDoneService = (data) => {
@@ -140,7 +160,17 @@ let getAllDateBookingWithMonth = () => {
   return axios.get("/api/get-booking-with-month");
 };
 
+let getBookingUser = (data) => {
+  return axios.get(
+    `/api/get-booking-user?patientId=${data.patientId}&date=${data.date}`
+  );
+};
+
 export {
+  postSendCancelBookingService,
+  getBookingUser,
+  deleteClinicService,
+  updateClinicService,
   handleLogin,
   getAllUsers,
   createNewUserService,
@@ -154,6 +184,7 @@ export {
   bulkCreateScheduleService,
   getScheduleDoctorService,
   getExtraDoctorInfoService,
+  getBookingWithDayService,
   getProfileDoctorByIdService,
   postPatientAppointmentService,
   postVerifyAppointmentService,

@@ -1,5 +1,19 @@
 export const adminMenu = [
   {
+    //Dashborad
+    name: "menu.system.admin.dashboard",
+    menus: [
+      {
+        name: "menu.system.admin.dashboard",
+        link: "/system/dashboard",
+        // subMenus: [
+        //     { name: 'menu.system.system-administrator.user-manage', link: '/system/user-manage' },
+        //     { name: 'menu.system.system-administrator.userRedux', link: '/system/user-redux' },
+        // ]
+      },
+    ],
+  },
+  {
     //Quản lý người dùng
     name: "menu.system.admin.user-manage",
     menus: [
@@ -38,6 +52,10 @@ export const adminMenu = [
         //     { name: 'menu.system.system-administrator.userRedux', link: '/system/user-redux' },
         // ]
       },
+      {
+        name: "menu.system.admin.list-manage-clinic",
+        link: "/system/list-clinic-manage",
+      },
     ],
   },
 
@@ -53,6 +71,10 @@ export const adminMenu = [
         //     { name: 'menu.system.system-administrator.userRedux', link: '/system/user-redux' },
         // ]
       },
+      {
+        name: "menu.system.admin.list-manage-speciality",
+        link: "/system/list-speciality-manage",
+      },
     ],
   },
 
@@ -67,6 +89,10 @@ export const adminMenu = [
         //     { name: 'menu.system.system-administrator.user-manage', link: '/system/user-manage' },
         //     { name: 'menu.system.system-administrator.userRedux', link: '/system/user-redux' },
         // ]
+      },
+      {
+        name: "menu.system.admin.list-manage-handbook",
+        link: "/system/list-handbook-manage",
       },
     ],
   },
@@ -90,6 +116,20 @@ export const doctorMenu = [
       {
         name: "menu.system.doctor.manage-patient-ok",
         link: "/doctor/manage-patient-ok",
+      },
+    ],
+  },
+];
+
+export const patientMenu = [
+  {
+    //Quản lý lịch khám
+    name: "menu.system.patient.booking-doctor",
+    menus: [
+      //Quan lich lich kham benh
+      {
+        name: "menu.system.patient.manage-schedule",
+        link: "/system/manage-history-schedule",
       },
     ],
   },

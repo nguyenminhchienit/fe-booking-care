@@ -39,11 +39,15 @@
                 "crud": "Quản lý CRUD",
                 "crud-redux": "Quản lý người dùng",
                 "clinic": "Phòng khám",
-                "manage-clinic": "Quản lý phòng khám",
+                "manage-clinic": "Thêm phòng khám",
                 "speciality": "Chuyên khoa",
-                "manage-speciality": "Quản lý chuyên khoa",
+                "manage-speciality": "Thêm chuyên khoa",
                 "handbook": "Cẩm nang",
-                "manage-handbook": "Quản lý cẩm nang"
+                "manage-handbook": "Thêm cẩm nang",
+                "list-manage-clinic": "Danh sách phòng khám",
+                "list-manage-speciality": "Danh sách chuyên khoa",
+                "list-manage-handbook": "Danh sách cẩm nang",
+                "dashboard": "Bảng điều khiển"
                 
             },
             "doctor": {
@@ -51,6 +55,11 @@
                 "manage-schedule": "Quản lý lịch khám",
                 "manage-patient": "Quản lý bệnh nhân",
                 "manage-patient-ok": "Quản lý bệnh nhân đã khám"
+            },
+            "patient": {
+                "booking-doctor": "Quản lý lịch đã đặt khám",
+                "manage-schedule": "Quản lý lịch khám"
+                
             }
             
         }

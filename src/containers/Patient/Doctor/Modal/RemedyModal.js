@@ -14,6 +14,8 @@ class RemedyModal extends Component {
       email: "",
       imgBase64: "",
       message: "",
+      trieuchung: "",
+      loidan: "",
     };
   }
 
@@ -52,6 +54,8 @@ class RemedyModal extends Component {
         : {
             email: this.state.email,
             imgBase64: this.state.imgBase64,
+            trieuchung: this.state.trieuchung,
+            loidan: this.state.loidan,
           };
     // this.props.sendRemedy(this.state);
     this.props.sendRemedy(data);
@@ -119,6 +123,32 @@ class RemedyModal extends Component {
                       ></input>
                     )}
                   </div>
+
+                  {!extra && (
+                    <div className="col-12 form-group">
+                      <label>Triệu chứng / Chuẩn đoán</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        value={this.state.trieuchung}
+                        onChange={(e) =>
+                          this.handleChangeInput(e, "trieuchung")
+                        }
+                      ></input>
+                    </div>
+                  )}
+
+                  {!extra && (
+                    <div className="col-12 form-group">
+                      <label>Lời dặn</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        value={this.state.loidan}
+                        onChange={(e) => this.handleChangeInput(e, "loidan")}
+                      ></input>
+                    </div>
+                  )}
                 </div>
               </div>
               <div className="remedy-modal-footer">

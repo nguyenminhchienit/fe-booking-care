@@ -6,6 +6,7 @@ import MdEditor from "react-markdown-editor-lite";
 import { CommonUtils } from "../../../utils";
 import { postCreateNewSpecialtyService } from "../../../services/userService";
 import { toast } from "react-toastify";
+import ListSpecialty from "./ListSpecialty";
 
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 
@@ -104,6 +105,10 @@ class ManageSpecialty extends Component {
             >
               Lưu thông tin
             </button>
+          </div>
+
+          <div className="col-12 mb-5">
+            <ListSpecialty />
           </div>
         </div>
       </div>
