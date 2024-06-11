@@ -116,6 +116,17 @@ let deleteClinicService = (clinicId) => {
   });
 };
 
+let updateHandbookService = (data) => {
+  return axios.put("/api/update-handbook", data);
+};
+
+let deleteHandbookService = (handbookId) => {
+  return axios.delete("/api/delete-handbook", {
+    data: {
+      id: handbookId,
+    },
+  });
+};
 let getListPatientForDoctorService = (data) => {
   return axios.get(
     `/api/get-list-patient-for-doctor?doctorId=${data.doctorId}&date=${data.date}`
@@ -167,6 +178,8 @@ let getBookingUser = (data) => {
 };
 
 export {
+  updateHandbookService,
+  deleteHandbookService,
   postSendCancelBookingService,
   getBookingUser,
   deleteClinicService,

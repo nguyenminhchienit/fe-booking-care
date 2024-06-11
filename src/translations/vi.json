@@ -1,16 +1,16 @@
 {
     "headerhome":{
-        "speciality": "Chuyên khoa",
-        "idspeciality": "Tìm bác sĩ theo chuyên khoa",
-        "facilities": "Cơ sở y tế",
-        "clinic": "Chọn bệnh viện phòng khám",
+        "speciality": "Đặt lịch",
+        "idspeciality": "Đặt lịch khám tùy chọn",
+        "facilities": "Liên hệ",
+        "clinic": "Liên hệ để đăng ký",
         "doctor": "Bác sĩ",
         "chooseDoctor": "Chọn bác sĩ giỏi",
         "package": "Gói khám",
-        "general": "Khám sức khỏe tổng quát",
+        "general": "Giới thiệu",
         "help": "Hỗ trợ",
-        "medical": "NỀN TẢNG Y TẾ",
-        "care": "CHĂM SÓC SỨC KHỎE TOÀN DIỆN",
+        "medical": "ĐẶT LỊCH KHÁM BỆNH",
+        "care": "CHĂM SÓC SỨC KHỎE VỚI TAKISCARE",
         "exam": "Khám chuyên khoa",
         "remote": "Khám bệnh từ xa",
         "physical": "Khám bệnh tổng quát",
@@ -79,10 +79,10 @@
         "edit": "Lưu thay đổi"
     },
     "homepage":{
-        "doctor-title": "Bác sĩ nổi bật",
+        "doctor-title": "Bác sĩ",
         "more": "XEM THÊM",
         "health-facilities": "Cơ sở y tế",
-        "popular-specialties": "Chuyên khoa phổ biến",
+        "popular-specialties": "Chuyên khoa",
         "handbook": "Cẩm nang",
         "media": "Truyền thông nói về TakisCare"
     }

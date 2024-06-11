@@ -124,7 +124,7 @@ class Header extends Component {
                     <FormattedMessage id="headerhome.package" />
                   </span>
                   <span className="des-item-nav">
-                    <FormattedMessage id="headerhome.general" />
+                    <FormattedMessage id="headerhome.help" />
                   </span>
                 </li>
               </ul>

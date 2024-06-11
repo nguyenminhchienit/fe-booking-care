@@ -12,6 +12,7 @@ import moment from "moment";
 import RemedyModal from "../../Patient/Doctor/Modal/RemedyModal";
 import { toast } from "react-toastify";
 import LoadingOverlay from "react-loading-overlay";
+import ModalTT from "../../Patient/Doctor/Modal/ModalTT";
 
 class ManagePatient extends Component {
   constructor(props) {
@@ -22,6 +23,7 @@ class ManagePatient extends Component {
       isOpenModal: false,
       dataModal: {},
       isLoading: false,
+      isOpenModalTT: false,
     };
   }
 
@@ -76,10 +78,21 @@ class ManagePatient extends Component {
   };
 
   handleShowModal = (patient) => {
-    console.log("Check mail: ", patient);
     this.setState({
       isOpenModal: true,
       dataModal: patient,
+    });
+  };
+
+  handleShowModalTT = () => {
+    this.setState({
+      isOpenModalTT: true,
+    });
+  };
+
+  handleHideModalTT = () => {
+    this.setState({
+      isOpenModalTT: false,
     });
   };
 
@@ -149,6 +162,7 @@ class ManagePatient extends Component {
                       <th>Tên</th>
                       <th>Email</th>
                       <th>Giới tính</th>
+                      <th>Lý do khám</th>
                       <th>Actions</th>
                     </tr>
                   </thead>
@@ -166,18 +180,27 @@ class ManagePatient extends Component {
                             </td>
                             <td>{item.patientData.firstName}</td>
                             <td>{item.patientData.email}</td>
+
                             <td>
                               {lang === LANGUAGES.VI
                                 ? item.patientData.genderData.valueVI
                                 : item.patientData.genderData.valueEN}
                             </td>
+                            <td>{item.reason}</td>
                             <td>
                               <button
-                                className="confirm-patient"
+                                className="btn btn-success"
                                 onClick={() => this.handleShowModal(item)}
                               >
                                 <i class="fas fa-check"></i>
                                 <span className="confirm">Xác nhận</span>
+                              </button>
+
+                              <button
+                                className="btn btn-warning ml-3"
+                                onClick={() => this.handleShowModalTT()}
+                              >
+                                <span className="confirm">Tạo toa thuốc</span>
                               </button>
                             </td>
                           </tr>
@@ -192,6 +215,11 @@ class ManagePatient extends Component {
             isOpenModal={this.state.isOpenModal}
             handleHideModal={this.handleHideModal}
             dataModal={this.state.dataModal}
+            sendRemedy={this.sendRemedy}
+          />
+          <ModalTT
+            isOpenModal={this.state.isOpenModalTT}
+            handleHideModal={this.handleHideModalTT}
             sendRemedy={this.sendRemedy}
           />
         </React.Fragment>

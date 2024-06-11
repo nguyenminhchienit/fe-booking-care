@@ -1,5 +1,5 @@
 .login-background{
-    background: linear-gradient(135deg, rgba(34,193,195,1) 0%,     rgba(253,187,45,1) 100%);
+    background: white;
     height: 100vh;
 }
 
@@ -55,11 +55,10 @@
     
 }
 
-.btn-login{
+.btn-log{
     width: 100%;
     padding: 10px;
     color: #fff;
-    background: linear-gradient(135deg, rgba(34,193,195,1) 0%,     rgba(253,187,45,1) 100%);
     border: none;
     outline: none;
     font-size: 20px;
@@ -71,6 +70,7 @@
         transition: all .3s linear;
     }
 }
+
 
 .forgot-pass{
     display: block;

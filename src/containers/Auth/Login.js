@@ -127,7 +127,10 @@ class Login extends Component {
               {this.state.errMessage}
             </div>
             <div className="col-12">
-              <button className="btn-login" onClick={() => this.handleLogin()}>
+              <button
+                className="btn btn-primary btn-log"
+                onClick={() => this.handleLogin()}
+              >
                 Login
               </button>
             </div>

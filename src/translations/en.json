@@ -1,16 +1,16 @@
 {
     "headerhome":{
-        "speciality": "Medical speciality",
-        "idspeciality": "Find a doctor by specialty",
-        "facilities": "Health facilities",
-        "clinic": "Choose hospital clinic",
+        "speciality": "Make an appointment",
+        "idspeciality": "Schedule an optional examination",
+        "facilities": "Contact",
+        "clinic": "Contact to register",
         "doctor": "Doctor",
         "chooseDoctor": "Choose a good doctor",
-        "package": "Checkup package",
-        "general": "General health check",
+        "package": "Introduce",
+        "general": "Support",
         "help": "Support",
-        "medical": "MEDICAL PLATFORM",
-        "care": "COMPREHENSIVE HEALTH CARE",
+        "medical": "SCHEDULE A MEDICAL EXAMINATION",
+        "care": "COMPREHENSIVE HEALTH CARE WITH TAKISCARE",
         "exam": "Specialized examination",
         "remote": "Remote medical examination",
         "physical": "Physical exam",
@@ -81,10 +81,10 @@
         "edit": "Save changes"
     },
     "homepage":{
-        "doctor-title": "Outstanding Doctor",
+        "doctor-title": "Doctor",
         "more": "MORE",
         "health-facilities": "Health Facilities",
-        "popular-specialties": "Popular specialties",
+        "popular-specialties": "Specialties",
         "handbook": "Handbook",
         "media": "Media talk about TakisCare"
     }

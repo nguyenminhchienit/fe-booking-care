@@ -17,7 +17,7 @@
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
-    background-color: #04AA6D;
+    background-color: #03a73e;;
     color: white;
   }
 
@@ -29,4 +29,10 @@
   .delete-clinic{
     cursor: pointer;
     background-color: red; border: none; padding: 10px 20px; border-radius: 3px; color: white; display: inline-block; margin-left: 10px; text-decoration: none;
+  }
+
+  .img-size{
+    width: 160px;
+    height: 80px;
+    object-fit: cover;
   }
